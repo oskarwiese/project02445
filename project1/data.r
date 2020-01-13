@@ -1,9 +1,9 @@
 rm(list=ls())
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 
-repetitions <- 10
-participants <- 10
-experiments <- 16
+#repetitions <- 10
+#participants <- 10
+#experiments <- 16
 
 #y <- as.matrix(read.table('armTrajectories.dat'))
 #dim(y) <- c(nrow(y), 3, repetitions, participants, experiments)
