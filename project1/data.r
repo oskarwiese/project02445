@@ -10,11 +10,8 @@ exp6 <- armdata[[exp_num]]
 example <- exp6[[1]][[1]]
 summary(example)
 as.vector(example)
-# Opretter en data fram, hvor vi har p , r, x ,y ,z
-
+# Opretter en dataframe, hvor vi har p , r, x ,y ,z
 df <- data.frame(matrix(ncol=302,nrow=100))
-#numbers <- seq(1,300,1)
-#names <- c("person","replication",)
 names. <- rep(NA, 302);
 names.[1] <- "person"; names.[2] <- "repetition";
 for (i in 1:300) {
@@ -59,7 +56,6 @@ tree_model  <- tree(person ~ . -repetition, data=train)
 plot(tree_model)
 text(tree_model)
 #summary(tree_model)
-
 
 # KNN 
 library(class)
