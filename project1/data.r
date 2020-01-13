@@ -1,4 +1,7 @@
 rm(list=ls())
+#setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
+
+
 load(file = "armdata.RData")
 exp_num <- 6
 exp6 <- armdata[[exp_num]]
