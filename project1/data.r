@@ -10,6 +10,7 @@ rm(list=ls())
 #yvelo <- as.matrix(read.table('armVelocity.dat'))
 #dim(yvelo) <- c(nrow(yvelo), 3, repetitions, participants, experiments)
 
+setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 load(file = "armdata.RData")
 data = armdata ; rm(armdata)
 
@@ -26,13 +27,15 @@ if (ploti == T){
 #Lidt test af dataen 
 y=0
 rm(x) & rm(y)
-  x <- ((data[[1]])[1])[[1]][[1]] ; y <- ((data[[1]])[1])[[1]][[2]]
+  x <- ((data[[6]])[1])[[1]][[1]] ; y <- ((data[[1]])[1])[[1]][[2]]
   par(mfrow=c(1,1))
   plot(x[,1],y[,1]) 
-  
+
+dim(x)
 #Eksperimenter:
 x[,1]
 #Perons: 
 x[,2]
 #Repetitions:
 x[,3]
+
