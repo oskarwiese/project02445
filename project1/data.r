@@ -3,30 +3,35 @@ rm(list=ls())
 
 
 load(file = "armdata.RData")
-data <- armdata ; rm(armdata)
+exp_num <- 6
+exp6 <- armdata[[exp_num]]
+# Example er person 1, rep 1 ; SOM HER exp6[[person]][[rep]]
+example <- exp6[[1]][[1]]
+summary(example)
+as.vector(example)
+# Opretter en data fram, hvor vi har p , r, x ,y ,z
 
-par(mfrow=c(2,5))
-
-#For den første liste i dataen 
-ploti = F ; 
+data <- data.frame(matrix(ncol=302,nrow=100))
+numbers <- seq(1,300,1)
+names <- c("person","replication",numbers)
+names(data) <- names
+k <- 1
 for (i in 1:10){
-x <- ((data[[1]])[1])[[1]][[i]]
-if (ploti == T){
-  plot(x,add=T)
-}}
+  for (j in 1:10){
+  data[k, 1] <- i
+  data[k, 2] <- j
+  example <- exp6[[i]][[j]]
+  example <- as.vector(example)
+  data[k,3:302] <- example 
+  k <- k+1
+  }}
+data$person <- as.factor(data$person)
+data$replication <- as.factor(data$replication)
 
-#Lidt test af dataen 
-y <- 0
-rm(x) & rm(y)
-  x <- ((data[[6]])[1])[[1]][[1]] ; y <- ((data[[1]])[1])[[1]][[2]]
-  par(mfrow=c(1,1))
-  plot(x[,1],y[,1]) 
+# Nu har vi lært at plot med data frame ;( )
+plot(as.numeric(data[1,3:102]),as.numeric(data[1,103:202]))
 
-dim(x)
-#Eksperimenter:
-x[,1]
-#Perons: 
-x[,2]
-#Repetitions:
-x[,3]
 
+model <- glm(person~replication*as.numeric(data[,1]),data=data,family="binomial")
+summary(model)
+?glm
