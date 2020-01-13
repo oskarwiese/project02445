@@ -1,4 +1,6 @@
 rm(list=ls())
+
+require(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 
 
@@ -11,29 +13,65 @@ summary(example)
 as.vector(example)
 # Opretter en data fram, hvor vi har p , r, x ,y ,z
 
-data <- data.frame(matrix(ncol=302,nrow=100))
-numbers <- seq(1,300,1)
-names <- c("person","replication",numbers)
-names(data) <- names
+df <- data.frame(matrix(ncol=302,nrow=100))
+#numbers <- seq(1,300,1)
+#names <- c("person","replication",)
+names. <- rep(NA, 302);
+names.[1] <- "person"; names.[2] <- "repetition";
+for (i in 1:300) {
+  if (i <= 100) {
+    names.[i+2] <- paste(c("x", as.character(i)), collapse = "");
+  } else if (i <= 200) {
+    names.[i+2] <- paste(c("y", as.character(i-100)), collapse = "");
+  } else {
+    names.[i+2] <- paste(c("z", as.character(i-200)), collapse = "");
+  }
+}
+names(df) <- names.;
 k <- 1
 for (i in 1:10){
   for (j in 1:10){
-  data[k, 1] <- i
-  data[k, 2] <- j
-  example <- exp6[[i]][[j]]
-  example <- as.vector(example)
-  data[k,3:302] <- example 
-  k <- k+1
+    df[k, 1] <- i
+    df[k, 2] <- j
+    example <- exp6[[i]][[j]]
+    example <- as.vector(example)
+    df[k,3:302] <- example 
+    k <- k+1
+  }
+}
+df$person <- as.factor(df$person)
+df$repetition <- as.factor(df$repetition)
+k = 0
+splitting <- seq(0.1,0.9,0.1) ;
+for (i in 1:100){
+  #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
+  train <- df[-i, ]
+  test  <- df[i, ]
+  tree_model  <- tree(person ~ . -repetition, data=train)
+  pred <- predict(tree_model,test,type="class") ;
+  if (pred == as.numeric(test[1])){
+    k = k + 1
   }}
-data$person <- as.factor(data$person)
-data$replication <- as.factor(data$replication)
+accuracy_tree <- k / 100 ; accuracy_tree
 
 # Nu har vi lært at plot med data frame ;( )
-plot(as.numeric(data[1,3:102]),as.numeric(data[1,103:202]))
+#plot(as.numeric(df[1,3:102]),as.numeric(df[1,103:202]))
+tree_model  <- tree(person ~ . -repetition, data=train)
+plot(tree_model)
+text(tree_model)
+#summary(tree_model)
 
 
-model <- glm(person~replication*as.numeric(data[,1]),data=data,family="binomial")
-summary(model)
-?glm
+# KNN 
+library(class)
+#Modellen opskrives som følgende: model_knn <- knn(train,test,cl=train[,1],k=10)
+j=0
+for (i in 1:100){
+  train <- df[-i, ]
+  test  <- df[i, ]
+  model_knn <- knn(train,test,cl=train[,1],k=4) ;
+  if (model_knn == as.numeric(test[1])){
+    j = j + 1
+  }}
+accuracy_knn = j /100 ; accuracy_knn
 
-anovmodel <- lm(, data = data, family = "binomial")
