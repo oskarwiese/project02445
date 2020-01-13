@@ -35,3 +35,5 @@ plot(as.numeric(data[1,3:102]),as.numeric(data[1,103:202]))
 model <- glm(person~replication*as.numeric(data[,1]),data=data,family="binomial")
 summary(model)
 ?glm
+
+anovmodel <- lm(, data = data, family = "binomial")
