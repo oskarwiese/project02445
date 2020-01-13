@@ -1,4 +1,15 @@
 rm(list=ls())
+#setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
+
+repetitions <- 10
+participants <- 10
+experiments <- 16
+
+#y <- as.matrix(read.table('armTrajectories.dat'))
+#dim(y) <- c(nrow(y), 3, repetitions, participants, experiments)
+#yvelo <- as.matrix(read.table('armVelocity.dat'))
+#dim(yvelo) <- c(nrow(yvelo), 3, repetitions, participants, experiments)
+
 load(file = "armdata.RData")
 data = armdata ; rm(armdata)
 
