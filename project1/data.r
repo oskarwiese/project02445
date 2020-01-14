@@ -32,7 +32,7 @@ exp6 <- armdata[[exp_num]]
 # Example er person 1, rep 1 ; SOM HER exp6[[person]][[rep]]
 example <- exp6[[1]][[1]]
 summary(example)
-as.vector(example)
+#as.vector(example)
 # Opretter en dataframe, hvor vi har p , r, x ,y ,z
 df <- data.frame(matrix(ncol=302,nrow=100))
 names. <- rep(NA, 302);
