@@ -5,27 +5,6 @@ library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 
 
-#install.packages("plot3D")
-#scatter3D(as.numeric(df[1,3:102]), as.numeric(df[1,103:202]), as.numeric(df[1,203:302]), theta = 35, phi = 50)
-plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
-for(i in 2:10){
-  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l")
-}
-
-for(i in 71:80){
-  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l", col = "red", lty=2)
-}
-legend("bottom", legend=c("Person 1", "Person 2"),
-       col=c("black", "red"), lty=1:2, cex=0.8)
-
-
-par(mfrow = c(1,3))
-boxplot(df[,3:102])
-boxplot(df[,103:202], main = "Distributions of movement")
-boxplot(df[,203:302])
-
-
-
 load(file = "armdata.RData")
 exp_num <- 6
 exp6 <- armdata[[exp_num]]
@@ -101,3 +80,25 @@ library(ggbiplot)
 #remotes::install_github('vqv/ggbiplot')
 ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
   
+
+
+
+
+#install.packages("plot3D")
+#scatter3D(as.numeric(df[1,3:102]), as.numeric(df[1,103:202]), as.numeric(df[1,203:302]), theta = 35, phi = 50)
+plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
+for(i in 2:10){
+  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l")
+}
+
+for(i in 71:80){
+  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l", col = "red", lty=2)
+}
+legend("bottom", legend=c("Person 1", "Person 2"),
+       col=c("black", "red"), lty=1:2, cex=0.8)
+
+
+par(mfrow = c(1,3))
+boxplot(df[,3:102])
+boxplot(df[,103:202], main = "Distributions of movement")
+boxplot(df[,203:302])

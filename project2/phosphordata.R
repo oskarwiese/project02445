@@ -38,7 +38,7 @@ plot(log(data$olsenP), data$yield, col = data$location, xlab = "olsenP [mg/hg]",
 curve(coef(modelolsenP)[1] * x/(coef(modelolsenP)[2] + x), add= T)
 
 
-# Undersøg om DGT eller olsen
+# Undersøg om DGT eller olsen er det bedste mål for yield
 fit <- lm(data$yield ~ data$DGT + data$olsenP)
 anova(fit) # DGT er signifikant med 0.005087 og olsenP usignifikant med 0.489226
 
