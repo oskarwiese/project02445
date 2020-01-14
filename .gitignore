@@ -1,276 +1,238 @@
-## Core latex/pdflatex auxiliary files:
+*.vscode
 *.aux
-*.lof
-*.log
-*.lot
-*.fls
-*.out
-*.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
-.*.lb
-
-## Intermediate documents:
-*.dvi
-*.xdv
-*-converted-to.*
-# these rules might exclude image files for figures etc.
-# *.ps
-# *.eps
-# *.pdf
-
-## Generated if empty string is given at "Please type another file name for output:"
-.pdf
-
-## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
-*.bcf
 *.blg
-*-blx.aux
-*-blx.bib
-*.run.xml
-
-## Build tool auxiliary files:
-*.fdb_latexmk
-*.synctex
-*.synctex(busy)
+*.log
+*.pdf
 *.synctex.gz
-*.synctex.gz(busy)
-*.pdfsync
+*.toc
+*__pycache__
+*.DS_Store
+*.out
 
-## Build tool directories for auxiliary files
-# latexrun
-latex.out/
 
-## Auxiliary and intermediate files from other packages:
-# algorithms
-*.alg
-*.loa
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# achemso
-acs-*.bib
+# C extensions
+*.so
 
-# amsthm
-*.thm
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# beamer
-*.nav
-*.pre
-*.snm
-*.vrb
+src/frontend/dist/
+src/frontend/node-modules/
 
-# changes
-*.soc
 
-# comment
-*.cut
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
-# cprotect
-*.cpt
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# elsarticle (documentclass of Elsevier journals)
-*.spl
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 
-# endnotes
-*.ent
+# Translations
+*.mo
+*.pot
 
-# fixme
-*.lox
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
 
-# feynmf/feynmp
-*.mf
-*.mp
-*.t[1-9]
-*.t[1-9][0-9]
-*.tfm
+# Flask stuff:
+instance/
+.webassets-cache
 
-#(r)(e)ledmac/(r)(e)ledpar
-*.end
-*.?end
-*.[1-9]
-*.[1-9][0-9]
-*.[1-9][0-9][0-9]
-*.[1-9]R
-*.[1-9][0-9]R
-*.[1-9][0-9][0-9]R
-*.eledsec[1-9]
-*.eledsec[1-9]R
-*.eledsec[1-9][0-9]
-*.eledsec[1-9][0-9]R
-*.eledsec[1-9][0-9][0-9]
-*.eledsec[1-9][0-9][0-9]R
+# Scrapy stuff:
+.scrapy
 
-# glossaries
-*.acn
-*.acr
-*.glg
-*.glo
-*.gls
-*.glsdefs
-*.lzo
-*.lzs
+# Sphinx documentation
+docs/_build/
 
-# uncomment this for glossaries-extra (will ignore makeindex's style files!)
-# *.ist
+# PyBuilder
+target/
 
-# gnuplottex
-*-gnuplottex-*
+# Jupyter Notebook
+.ipynb_checkpoints
 
-# gregoriotex
-*.gaux
-*.gtex
+# pyenv
+.python-version
 
-# htlatex
-*.4ct
-*.4tc
-*.idv
-*.lg
-*.trc
-*.xref
+# celery beat schedule file
+celerybeat-schedule
 
-# hyperref
-*.brf
+# SageMath parsed files
+*.sage.py
 
-# knitr
-*-concordance.tex
-# TODO Comment the next line if you want to keep your tikz graphics files
-*.tikz
-*-tikzDictionary
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# listings
-*.lol
+# Spyder project settings
+.spyderproject
+.spyproject
 
-# luatexja-ruby
-*.ltjruby
+# Rope project settings
+.ropeproject
 
-# makeidx
-*.idx
-*.ilg
-*.ind
+# mkdocs documentation
+/site
 
-# minitoc
-*.maf
-*.mlf
-*.mlt
-*.mtc[0-9]*
-*.slf[0-9]*
-*.slt[0-9]*
-*.stc[0-9]*
+# mypy
+.mypy_cache/
 
-# minted
-_minted*
-*.pyg
 
-# morewrites
-*.mw
 
-# nomencl
-*.nlg
-*.nlo
-*.nls
+# Directories #
+bin/
+target/
+libs/
+tmp/
+node_modules/
+dist/
+src/main/frontend/dist/
+node/
+jaxws/jaxws-client/src/main/
+jaxws/jaxws-endpoint/src/main/webapp/WEB-INF/wsdl/
 
-# pax
-*.pax
+# OS Files #
+.DS_Store
 
-# pdfpcnotes
-*.pdfpc
+*.class
 
-# sagetex
-*.sagetex.sage
-*.sagetex.py
-*.sagetex.scmd
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+rebel.xml
+tss_texts.properties
 
-# scrwfile
-*.wrt
 
-# sympy
-*.sout
-*.sympy
-sympy-plots-for-*.tex/
+######################
+# Windows
+######################
 
-# pdfcomment
-*.upa
-*.upb
+# Windows image file caches
+Thumbs.db
 
-# pythontex
-*.pytxcode
-pythontex-files-*/
+# Folder config file
+Desktop.ini
 
-# tcolorbox
-*.listing
+######################
+# OSX
+######################
 
-# thmtools
-*.loe
+.DS_Store
+.svn
 
-# TikZ & PGF
-*.dpth
-*.md5
-*.auxlock
+# Thumbnails
+._*
 
-# todonotes
-*.tdo
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
 
-# vhistory
-*.hst
-*.ver
+######################
+# NetBeans
+######################
+nbproject/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
-# easy-todo
-*.lod
+######################
+# IDEA
+######################
+*.iml
+*.ipr
+*.iws
+.idea/
+atlassian-ide-plugin.xml
 
-# xcolor
-*.xcp
+######################
+# Visual Studio Code
+######################
+*.code-workspace
+.vscode/
 
-# xmpincl
-*.xmpi
+######################
+# Eclipse
+######################
 
-# xindy
-*.xdy
-
-# xypic precompiled matrices and outlines
-*.xyc
-*.xyd
-
-# endfloat
-*.ttt
-*.fff
-
-# Latexian
-TSWLatexianTemp*
-
-## Editors:
-# WinEdt
+*.pydevproject
+.project
+.metadata
+*.tmp
 *.bak
-*.sav
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
-# Texpad
-.texpadtmp
+# External tool builders
+.externalToolBuilders/
 
-# LyX
-*.lyx~
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-# Kile
-*.backup
+# CDT-specific
+.cproject
 
-# gummi
-.*.swp
+# PDT-specific
+.buildpath
 
-# KBibTeX
-*~[0-9]*
+# Testing environment specific
+derby.log
 
-# TeXnicCenter
-*.tps
 
-# auto folder when using emacs and auctex
-./auto/*
-*.el
+######################
+# Liberty tools
+######################
 
-# expex forward references with \gathertags
-*-tags.tex
+.factorypath
 
-# standalone packages
-*.sta
-
-# Makeindex log files
-*.lpz
+# SUB Version
+.svn/
