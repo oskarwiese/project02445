@@ -77,7 +77,17 @@ accuracy_knn = j /100 ; accuracy_knn
 
 
 #install.packages("plot3D")
-#scatter3D(as.numeric(df[1,3:102]), as.numeric(df[1,103:202]), as.numeric(df[1,203:302]), theta = 35, phi = 50)
+library(plot3D)
+
+temp1 <- unlist(df[1:10,3:102])
+temp2 <- unlist(df[1:10,103:202])
+temp3 <- unlist(df[1:10,203:302])
+
+scatter3D(temp1, temp2, temp3, theta = 220, phi = 10, main = "The arm trajectories of person 1", xlab = "Left-right", ylab = "Back-forth", zlab = "Up-down", col = rainbow(1270), colvar = NULL, pch = 16, cex = 0.6, bty = "b2")
+
+
+
+par(mfrow = c(1,1))
 plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
 for(i in 2:10){
   lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l")
@@ -90,7 +100,7 @@ legend("bottom", legend=c("Person 1", "Person 2"),
        col=c("black", "red"), lty=1:2, cex=0.8)
 
 
-par(mfrow = c(1,3))
 boxplot(df[,3:102])
 boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
+
