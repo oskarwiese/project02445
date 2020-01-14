@@ -93,3 +93,11 @@ for (i in 1:100){
   }}
 accuracy_knn = j /100 ; accuracy_knn
 
+#Lidt pca 
+
+pca <- prcomp(df[,3:302], center = T, scale. = T)
+summary(pca)
+library(ggbiplot)
+#remotes::install_github('vqv/ggbiplot')
+ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
+  

@@ -30,22 +30,30 @@ df <- data.frame(
   "experiment" <- as.factor(experiment)
 )
 names(df) <- c("position","xyz","repetition","person","experiment")
+df
 model <- lm(position~xyz+repetition+person+experiment,data = df)
 anova(model)
 
-k=0
-p_vals <- rep(NA,120)
-for (i in 1:15){
-  for (j in i:16){
-    if (i != j){
-      x <- subset.data.frame(df,df$person == 1 & df$experiment == i)$position
-      y <- subset.data.frame(df,df$person == 1 & df$experiment == j)$position
-      p_val <- t.test(x,y,paired = T)$p.value
-      p_vals[i] <- p_val
-      print(i)
-    }}
+par( mfrow=c(5,4))
+par(mar=c(1,1,1,1))
+for (t in 1:10){
+  person_num <- t
+  k=1
+  p_vals <- c(rep(NA,120))
+  for (i in 1:15){
+    for (j in i:16){
+      if (i != j){
+        x <- subset.data.frame(df,df$person == person_num & df$experiment == i)$position
+        y <- subset.data.frame(df,df$person == person_num & df$experiment == j)$position
+        p_val <- t.test(x,y,paired = T)$p.value
+        p_vals[k] <- p_val
+        k = k +1 
+      }}
+  }
+  plot(sort(p_vals))
+  length(p_vals[p_vals < 0.05])
+  adjust_p <- p.adjust(sort(p_vals),method = "BH")
+  plot(adjust_p)
+  length(adjust_p[adjust_p < 0.05])
 }
-p_vals
-x <- subset.data.frame(df,df$person == 1 & df$experiment == 1)$position
-y <- subset.data.frame(df,df$person == 1 & df$experiment == 16)$position
-t.test(x,y,paired=T)$p.value
+sort(p_vals)
