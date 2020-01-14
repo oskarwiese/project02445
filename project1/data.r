@@ -1,6 +1,29 @@
 rm(list=ls())
-require(tree)
+
+library(class)
+library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
+
+
+#install.packages("plot3D")
+#scatter3D(as.numeric(df[1,3:102]), as.numeric(df[1,103:202]), as.numeric(df[1,203:302]), theta = 35, phi = 50)
+plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
+for(i in 2:10){
+  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l")
+}
+
+for(i in 71:80){
+  lines(as.numeric(df[i,3:102]), as.numeric(df[i,203:302]), type = "l", col = "red", lty=2)
+}
+legend("bottom", legend=c("Person 1", "Person 2"),
+       col=c("black", "red"), lty=1:2, cex=0.8)
+
+
+par(mfrow = c(1,3))
+boxplot(df[,3:102])
+boxplot(df[,103:202], main = "Distributions of movement")
+boxplot(df[,203:302])
+
 
 
 load(file = "armdata.RData")
@@ -38,7 +61,7 @@ for (i in 1:10){
 df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
 k = 0
-splitting <- seq(0.1,0.9,0.1) ;
+
 for (i in 1:100){
   #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
   train <- df[-i, ]
@@ -58,7 +81,7 @@ text(tree_model)
 #summary(tree_model)
 
 # KNN 
-library(class)
+
 #Modellen opskrives som følgende: model_knn <- knn(train,test,cl=train[,1],k=10)
 j=0
 for (i in 1:100){
