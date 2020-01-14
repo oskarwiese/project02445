@@ -25,6 +25,7 @@ boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
 
 
+
 load(file = "armdata.RData")
 exp_num <- 6
 exp6 <- armdata[[exp_num]]

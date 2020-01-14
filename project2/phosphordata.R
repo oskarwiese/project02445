@@ -23,4 +23,14 @@ curve(fit2$coefficients[1] + x * fit2$coefficients[2], add = T)
 plot(data$olsenP, data$DGT, col = data$location, xlab = "olsenP [mg/hg]", ylab = expression(paste("DGT [", mu, "g/L]")))
 
 
-expression(paste("Sampled values, ", mu, "=5, ", sigma, "=1")))
+# Fit non-linear model til DGT og vis fit
+modelDGT <- nls(yield ~ alfa * log(DGT)/(beta + log(DGT)), data = data, start = list(alfa = 90 , beta = 1))
+coef(modelDGT)
+plot(log(data$DGT), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
+curve(coef(modelDGT)[1] * x/(coef(modelDGT)[2] + x), add= T)
+
+# Fit non-linear model til olsenP og vis fit
+modelolsenP <- nls(yield ~ alfa * log(olsenP)/(beta + log(olsenP)), data = data, start = list(alfa = 90 , beta = 1))
+coef(modelolsenP)
+plot(log(data$olsenP), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
+curve(coef(modelolsenP)[1] * x/(coef(modelolsenP)[2] + x), add= T)
