@@ -19,8 +19,9 @@ legend("bottom", legend=c("Person 1", "Person 2"),
        col=c("black", "red"), lty=1:2, cex=0.8)
 
 
-boxplot(df[,3:102], main = "Distribution of left-right movement")
-boxplot(df[,103:202])
+par(mfrow = c(1,3))
+boxplot(df[,3:102])
+boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
 
 
