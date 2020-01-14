@@ -79,8 +79,9 @@ summary(pca)
 library(ggbiplot)
 #remotes::install_github('vqv/ggbiplot')
 ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
-  
+ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
+df[1:10,]
 
 
 
@@ -98,7 +99,7 @@ legend("bottom", legend=c("Person 1", "Person 2"),
        col=c("black", "red"), lty=1:2, cex=0.8)
 
 
-par(mfrow = c(1,3))
+par(mfrow = c(1,1))
 boxplot(df[,3:102])
 boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
