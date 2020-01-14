@@ -1,11 +1,11 @@
 rm(list=ls())
 
-require(class)
-require(tree)
+library(class)
+library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 
 
-install.packages("plot3D")
+#install.packages("plot3D")
 #scatter3D(as.numeric(df[1,3:102]), as.numeric(df[1,103:202]), as.numeric(df[1,203:302]), theta = 35, phi = 50)
 plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
 for(i in 2:10){
