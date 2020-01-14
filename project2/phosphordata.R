@@ -34,11 +34,18 @@ curve(coef(modelDGT)[1] * x/(coef(modelDGT)[2] + x), add= T)
 # Fit non-linear model til olsenP og vis fit
 modelolsenP <- nls(yield ~ alfa * log(olsenP)/(beta + log(olsenP)), data = data, start = list(alfa = 90 , beta = 1))
 coef(modelolsenP)
-plot(log(data$olsenP), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
+plot(log(data$olsenP), data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
 curve(coef(modelolsenP)[1] * x/(coef(modelolsenP)[2] + x), add= T)
 
 
-# Undersøg om der er en mængden af fosfor har indflydelse på yield
+# Undersøg om DGT eller olsen
 fit <- lm(data$yield ~ data$DGT + data$olsenP)
-summary(fit)
-anova(fit)
+anova(fit) # DGT er signifikant med 0.005087 og olsenP usignifikant med 0.489226
+
+
+# Undersøg om mængden af fosfor har en signifikant betydning for yield
+fitDGT <- lm(data$yield ~ data$DGT)
+anova(fitDGT)
+
+fitolsenP <- lm(data$yield ~ data$olsenP)
+anova(fitolsenP)
