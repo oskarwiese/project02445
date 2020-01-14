@@ -16,14 +16,18 @@ summary(fit2)
 
 
 plot(data)
+
 par(mfrow = c(1,2))
 plot(log(data$DGT), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
 curve(fit1$coefficients[1] + x * fit1$coefficients[2], add = T)
 plot(log(data$olsenP), data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
 curve(fit2$coefficients[1] + x * fit2$coefficients[2], add = T)
+
+par(mfrow = c(1,1))
 plot(data$olsenP, data$DGT, col = data$location, xlab = "olsenP [mg/hg]", ylab = expression(paste("DGT [", mu, "g/L]")))
 
 
+par(mfrow = c(1,2))
 # Fit non-linear model til DGT og vis fit
 modelDGT <- nls(yield ~ alfa * log(DGT)/(beta + log(DGT)), data = data, start = list(alfa = 90 , beta = 1))
 coef(modelDGT)
