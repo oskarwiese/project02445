@@ -1,8 +1,8 @@
 rm(list=ls())
-setwd("/Users/ejer/Desktop/02445 project/project02445/project2")
+#setwd("/Users/ejer/Desktop/02445 project/project02445/project2")
 
 
-load(file = "fosfor_data.RData")
+load(file = "fosfor_data.Rdata")
 data = Phosphorous ; rm(Phosphorous)
 data$location <- as.factor(data$location)
 #data <- na.omit(data) 
@@ -34,31 +34,35 @@ plot(data$olsenP, data$DGT, col = data$location, xlab = "olsenP [mg/hg]", ylab =
 
 par(mfrow = c(1,2))
 # Fit non-linear model til DGT og vis fit
-modelDGT <- nls(yield ~ alfa * log(DGT)/(beta + log(DGT)), data = data, start = list(alfa = 90 , beta = 1))
+modelDGT <- nls(yield ~ alfa * DGT/(beta + DGT), data = data, start = list(alfa = 90 , beta = 1))
 summary(modelDGT)
 coef(modelDGT)
-plot(log(data$DGT), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
+plot(data$DGT, data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
 curve(coef(modelDGT)[1] * x/(coef(modelDGT)[2] + x), add= T)
 
 
 # Fit non-linear model til olsenP og vis fit
-modelolsenP <- nls(yield ~ alfa * log(olsenP)/(beta + log(olsenP)), data = data, start = list(alfa = 90 , beta = 1))
+modelolsenP <- nls(yield ~ alfa * olsenP/(beta + olsenP), data = data, start = list(alfa = 90 , beta = 1))
 summary(modelolsenP)
 coef(modelolsenP)
-plot(log(data$olsenP), data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
+plot(data$olsenP, data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
 curve(coef(modelolsenP)[1] * x/(coef(modelolsenP)[2] + x), add= T)
 
 
-# Undersøg om DGT eller olsen er det bedste mål for yield
+# Unders?g om DGT eller olsen er det bedste m?l for yield
 fit <- lm(data$yield ~ data$DGT + data$olsenP)
 anova(fit) # DGT er signifikant med 0.005087 og olsenP usignifikant med 0.489226
 
 
-# Undersøg om mængden af fosfor har en signifikant betydning for yield
-fitDGT <- lm(data$yield ~ data$DGT)
+# Unders?g om m?ngden af fosfor har en signifikant betydning for yield
+fitDGT <- lm(data$yield ~ data$DGT+data$location)
 anova(fitDGT)
 
-fitolsenP <- lm(data$yield ~ data$olsenP)
+fitolsenP <- lm(data$yield ~ data$olsenP+data$location)
 anova(fitolsenP)
 
 summary(data$location)
+par(mfrow=c(1,1))
+plot(data$DGT,data$olsenP)
+
+
