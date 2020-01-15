@@ -127,3 +127,6 @@ boxplot(df[,203:302])
 #Mcnemar
 
 wilcox.test(pred_knn, pred_tree, paired=TRUE)
+par(mfrow = c(1,2))
+hist(pred_knn)
+hist(pred_tree)
