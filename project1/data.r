@@ -1,6 +1,6 @@
 rm(list=ls())
 
-set.seed(59)
+set.seed(60)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -81,7 +81,10 @@ accuracy_knn = j /100 ; accuracy_knn
 #Lidt pca 
 
 pca <- prcomp(df[,3:302], center = T, scale. = T)
-summary(pca)
+s<-summary(pca)
+par(mfrow=c(1,1))
+plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explained")
+curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
 #install.packages("remotes")
 #library(remotes)
 #remotes::install_github('vqv/ggbiplot')
@@ -102,10 +105,8 @@ temp2 <- unlist(df[1:10,103:202])
 temp3 <- unlist(df[1:10,203:302])
 
 par(mfrow = c(1,1))
-#par(mar = c(5.1, 4.1, 4.1, 2.1))
-par(mar = rep(0.4, 4))
 scatter3D(temp1, temp2, temp3, theta = 220, phi = 10, xlab = "Left-right", ylab = "Back-forth", zlab = "Up-down", col = rainbow(1270), colvar = NULL, pch = 16, cex = 0.6, bty = "b2")
-par(mar = c(5.1, 4.1, 4.1, 2.1))
+
 
 
 par(mfrow = c(1,1))
@@ -132,9 +133,9 @@ boxplot(df[,203:302])
 wilcox.test(pred_knn, pred_tree, paired=TRUE)
 
 par(mfrow = c(1,3))
-hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18), xlab = "KNN Prediction", main = NULL)
-hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18), xlab = "decision tree Prediction", main = "Predictions and ground truth")
-hist(test_val, breaks = seq(0,10,1), ylim = c(0,18), xlab = "Ground truth", main = NULL)
+hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
+hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
+hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
 
 # En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
 
@@ -149,13 +150,13 @@ notrue <- pred_knn != test_val & pred_tree != test_val
 n[4] <- sum(notrue, na.rm = T)
 N <- 100
 
-theta <- (n[2] - n[3]) / N ; theta
-Q <- (N^2 * (N + 1) * (theta + 1) * (1 - theta)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
-p <- ((theta + 1) * (Q - 1)) / 2
-q <- ((1 - theta) * (Q - 1)) / 2
+diff <- (n[2] - n[3]) / N ; diff
+Q <- (N^2 * (N + 1) * (diff + 1) * (1 - diff)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
+p <- ((diff + 1) * (Q - 1)) / 2
+q <- ((1 - diff) * (Q - 1)) / 2
 
-lower <- 2 * qbeta(0.025, p, q) - 1
-upper <- 2 * qbeta(0.975, p, q) - 1
-c(lower, theta, upper)
+lower <- 2 * qbinom(0.025, p, q)-1
+upper <- 2 * qbinom(0.975, p, q)-1
 
 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
+
