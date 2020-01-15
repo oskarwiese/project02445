@@ -6,7 +6,7 @@ load(file = "fosfor_data.Rdata")
 data = Phosphorous ; rm(Phosphorous)
 data$location <- as.factor(data$location)
 
-
+data
 
 
 
