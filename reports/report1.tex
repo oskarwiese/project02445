@@ -6,6 +6,7 @@
 \newcommand{\so}[2]{{#1}\mathrm{e}{#2}}
 % \geometry{top=1cm}
 \usepackage{hyperref}
+\usepackage{amsmath}
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
@@ -92,7 +93,34 @@ Therefore, it seems to produce a classifier, which can classify the specific tes
 \textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
 
 \section{Results}
-\textit{Present the results. \\ Tables and figures are good ways of illustrating results.}
+\textit{Present the results. \\ Tables and figures are good ways of illustrating results.} \\
+Using the 3-nearest neighbor and binary classification tree models to classify the person from the curve yielded the following results.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& 3-Nearest neighbor & Binary classification tree \\ \hline
+		Accuracy & 0.62               & 0.47                       \\ \hline
+	\end{tabular}
+\end{table}
+
+To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
+
+\[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 37 & 25 \\ 10 & 28 \end{bmatrix}\] 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Measure        & Value                          \\ \hline
+		$\hat{\theta}$ & 0.15                           \\ \hline
+		p-value        & 0.0167                         \\ \hline
+		CI             & $0.0375 \leq 0.150 \leq 0.261$ \\ \hline
+	\end{tabular}
+\end{table}
+
+
 
 \section{Discussion}
 \textit{What do your results show? \\ Discuss your results. How reliable are they?}
