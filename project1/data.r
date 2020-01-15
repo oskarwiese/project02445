@@ -130,9 +130,9 @@ boxplot(df[,203:302])
 wilcox.test(pred_knn, pred_tree, paired=TRUE)
 
 par(mfrow = c(1,3))
-hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
-hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
-hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
+hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18), xlab = "KNN Prediction", main = NULL)
+hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18), xlab = "decision tree Prediction", main = "Predictions and ground truth")
+hist(test_val, breaks = seq(0,10,1), ylim = c(0,18), xlab = "Ground truth", main = NULL)
 
 # En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
 

@@ -5,10 +5,9 @@ setwd("/Users/ejer/Desktop/02445 project/project02445/project2")
 load(file = "fosfor_data.RData")
 data = Phosphorous ; rm(Phosphorous)
 data$location <- as.factor(data$location)
+#data <- na.omit(data) 
 
 data
-
-
 
 # Linear fits for sjov og for at vise at dette ikke er et godt valg
 fit1 <- lm(data$yield ~ log(data$DGT))
