@@ -1,6 +1,6 @@
 rm(list=ls())
 
-set.seed(47)
+set.seed(59)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -145,7 +145,14 @@ othertrue <- pred_knn != test_val & pred_tree == test_val
 n[3] <- sum(othertrue, na.rm = T)
 notrue <- pred_knn != test_val & pred_tree != test_val
 n[4] <- sum(notrue, na.rm = T)
+N <- 100
 
-diff <- (n[2] - n[3]) / 100 ; theta
+diff <- (n[2] - n[3]) / N ; diff
+Q <- (N^2 * (N + 1) * (diff + 1) * (1 - diff)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
+p <- ((diff + 1) * (Q - 1)) / 2
+q <- ((1 - diff) * (Q - 1)) / 2
+
+lower <- 2 * qbinom(0.025, p, q)
+upper <- 2 * qbinom(0.975, p, q)
 
 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
