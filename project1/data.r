@@ -65,10 +65,12 @@ text(tree_model)
 #Modellen opskrives som f√∏lgende: model_knn <- knn(train,test,cl=train[,1],k=10)
 j=0
 pred_knn <- rep(NA, 100)
+test_val <- rep(NA,100)
 for (i in 1:100){
   train <- df[-i, ]
   test  <- df[i, ]
   model_knn <- knn(train,test,cl=train[,1],k=4)
+  test_val[i] <- as.numeric(test[1])
   pred_knn[i] <- model_knn
   if (model_knn == as.numeric(test[1])){
     j = j + 1
@@ -118,7 +120,7 @@ boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
 
 
-# McNemar's test pÂ KNN og decision tree
+# McNemar's test p? KNN og decision tree
 
 #compare <- data.frame(Pred_knn = pred_knn, Pred_tree = pred_tree)
 #tab <- xtabs(data = compare)
@@ -127,3 +129,6 @@ boxplot(df[,203:302])
 #Mcnemar
 
 wilcox.test(pred_knn, pred_tree, paired=TRUE)
+?wilcox.test.formula
+plot(pred_knn,pred_tree)
+
