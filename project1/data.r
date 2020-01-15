@@ -1,5 +1,6 @@
 rm(list=ls())
 
+set.seed(47)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -69,7 +70,7 @@ test_val <- rep(NA,100)
 for (i in 1:100){
   train <- df[-i, ]
   test  <- df[i, ]
-  model_knn <- knn(train,test,cl=train[,1],k=4)
+  model_knn <- knn(train,test,cl=train[,1],k=3)
   test_val[i] <- as.numeric(test[1])
   pred_knn[i] <- model_knn
   if (model_knn == as.numeric(test[1])){
@@ -81,6 +82,9 @@ accuracy_knn = j /100 ; accuracy_knn
 
 pca <- prcomp(df[,3:302], center = T, scale. = T)
 summary(pca)
+#install.packages("remotes")
+#library(remotes)
+#remotes::install_github('vqv/ggbiplot')
 library(ggbiplot)
 #remotes::install_github('vqv/ggbiplot')
 ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
@@ -97,6 +101,7 @@ temp1 <- unlist(df[1:10,3:102])
 temp2 <- unlist(df[1:10,103:202])
 temp3 <- unlist(df[1:10,203:302])
 
+par(mfrow = c(1,1))
 scatter3D(temp1, temp2, temp3, theta = 220, phi = 10, xlab = "Left-right", ylab = "Back-forth", zlab = "Up-down", col = rainbow(1270), colvar = NULL, pch = 16, cex = 0.6, bty = "b2")
 
 
@@ -122,13 +127,25 @@ boxplot(df[,203:302])
 
 # McNemar's test p? KNN og decision tree
 
-#compare <- data.frame(Pred_knn = pred_knn, Pred_tree = pred_tree)
-#tab <- xtabs(data = compare)
-
-#Mcnemar <- mcnemar.test(tab)
-#Mcnemar
-
 wilcox.test(pred_knn, pred_tree, paired=TRUE)
-par(mfrow = c(1,2))
-hist(pred_knn)
-hist(pred_tree)
+
+par(mfrow = c(1,3))
+hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
+hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
+hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
+
+# En anden måde at implementere mcnemar, der måske også er korrekt
+
+n <- rep(NA, 4)
+alltrue <- pred_knn == test_val & pred_tree == test_val
+n[1] <- sum(alltrue, na.rm = T)
+onetrue <- pred_knn == test_val & pred_tree != test_val
+n[2] <- sum(onetrue, na.rm = T)
+othertrue <- pred_knn != test_val & pred_tree == test_val
+n[3] <- sum(othertrue, na.rm = T)
+notrue <- pred_knn != test_val & pred_tree != test_val
+n[4] <- sum(notrue, na.rm = T)
+
+diff <- (n[2] - n[3]) / 100 ; theta
+
+2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
