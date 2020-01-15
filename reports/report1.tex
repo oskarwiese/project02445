@@ -7,6 +7,7 @@
 % \geometry{top=1cm}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{booktabs}
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
@@ -144,28 +145,42 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|l|l|l|}
-		\hline
-		& 3-Nearest neighbor & Binary classification tree \\ \hline
-		Accuracy & 0.62               & 0.47                       \\ \hline
+	\begin{tabular}{l r}
+		\toprule
+		Classification Model       & Accuracy  \\ \midrule
+		3-Nearest neighbor         & 0.62      \\ 
+		Binary classification tree & 0.47      \\ \bottomrule
 	\end{tabular}
 \end{table}
 
-To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
+\noindent To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
 
 \[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 37 & 25 \\ 10 & 28 \end{bmatrix}\] 
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|l|}
-		\hline
-		Measure        & Value                          \\ \hline
-		$\hat{\theta}$ & 0.15                           \\ \hline
-		p-value        & 0.0167                         \\ \hline
-		CI             & $0.0375 \leq 0.150 \leq 0.261$ \\ \hline
+	\begin{tabular}{l r}
+		\toprule
+		Measure        & Value                          \\ \midrule
+		$\hat{\theta}$ & 0.15                           \\ 
+		p-value        & 0.0167                         \\ 
+		CI             & $0.0375 \leq 0.150 \leq 0.261$ \\ \bottomrule
 	\end{tabular}
 \end{table}
 
+\noindent Using ANOVA, the following results have been gathered for investigating whether the experiment has a significant effect on the resulting curve.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l r}
+		\toprule
+		Variable       & p-value                         \\ \midrule
+		Position       & $<2.200 \cdot 10^{-16}$         \\ 
+		Repetition     & $5.424 \cdot 10^{-7}$           \\ 
+		Person         & $<2.200 \cdot 10^{-16}$         \\ 
+		Experiment     & $<2.200 \cdot 10^{-16}$         \\ \bottomrule
+	\end{tabular}
+\end{table}
 
 
 \section{Discussion}
