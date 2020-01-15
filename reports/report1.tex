@@ -101,12 +101,42 @@ Two different models are constructed in order to classify a specific test subjec
 One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based Hunts algorithm, and the best split is the one with highest purity gain. The splitting ends when the splits no longer adds value to the predictions. 
 
 \subsubsection*{K-nearest neighbors}
-The second machine learning model used for classification is a K-nearest neighbor classifier. 
+The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. 
 
+\subsection*{Comparison of models}
+To statistically compare the models a McNemar test is chosen. The models are compared under the following hypothesis. 
 
-\subsection*{Comparison method}
+\begin{align*}\label{key}
+H_0 : & \hat \theta_1 =  \hat \theta_2 \\
+H_1 : & \hat \theta_1 \neq  \hat \theta_2
+\end{align*}
+Where $ \hat \theta_1 $ and $ \hat \theta_2  $ is the estimated accuracy of models. The \textbf{n} matrix is calculated as, 
+\begin{equation*}\label{key}
+\begin{aligned}
+n_{11} &=\sum_{i=1}^{n} c_{i}^{A} c_{i}^{B} \qquad= \{ \text{Both classifiers are correct} \} \\
+n_{12} &=\sum_{k=1}^{n} c_{i}^{A}\left(1-c_{i}^{B}\right) \quad=\{A \text { is correct, } B \text { is wrong }\} \\
+n_{21} &=\sum_{k=1}^{n}\left(1-c_{i}^{A}\right) c_{i}^{B} \quad=\{A \text { is wrong, } B \text { is correct }\} \\
+n_{22} &=\sum_{k=1}^{n}\left(1-c_{i}^{A}\right)\left(1-c_{i}^{B}\right)=\{\text { Both classifiers are wrong }\}
+\end{aligned}
+\end{equation*}
+\noindent
+The p-value is then calculated using the following expression, 
+\begin{equation}\label{key}
+p=2 \mathrm{cdf}_{\mathrm{binom}}\left(m=\min \left\{n_{12}, n_{21}\right\} | prop=\frac{1}{2}, N=n_{12}+n_{21}\right)
+\end{equation}
+\noindent
+The interpretation is that the lower p is, the more evidence there is A is better than B,but this is only to be interpreted along with the confidence interval given by the following expression.
 
-\subsection*{Method for significant of effect of experiments}
+\begin{equation}\label{key}
+\begin{aligned}
+&\theta_{L}=2 \operatorname{cdf}_{B}^{-1}\left(\frac{\alpha}{2} | \alpha=p, \beta=q\right)-1\\
+&\theta_{U}=2 \operatorname{cdf}_{B}^{-1}\left(1-\frac{\alpha}{2} | \alpha=p, \beta=q\right)-1
+\end{aligned}
+\end{equation}
+\noindent
+If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ and the p-value is significant, then model A is better than model B \cite{mlbog}.
+
+\subsection*{Are experiments significant as F?}
 
 \section{Results}
 \textit{Present the results. \\ Tables and figures are good ways of illustrating results.} \\
