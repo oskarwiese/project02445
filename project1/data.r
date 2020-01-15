@@ -1,6 +1,6 @@
 rm(list=ls())
 
-set.seed(47)
+set.seed(59)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -134,7 +134,7 @@ hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
 hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
 hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
 
-# En anden måde at implementere mcnemar, der måske også er korrekt
+# En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
 
 n <- rep(NA, 4)
 alltrue <- pred_knn == test_val & pred_tree == test_val
@@ -146,6 +146,6 @@ n[3] <- sum(othertrue, na.rm = T)
 notrue <- pred_knn != test_val & pred_tree != test_val
 n[4] <- sum(notrue, na.rm = T)
 
-diff <- (n[2] - n[3]) / 100 ; theta
+diff <- (n[2] - n[3]) / 100 ; diff
 
 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
