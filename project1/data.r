@@ -134,7 +134,7 @@ hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
 hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
 hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
 
-# En anden måde at implementere mcnemar, der måske også er korrekt
+# En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
 
 n <- rep(NA, 4)
 alltrue <- pred_knn == test_val & pred_tree == test_val
