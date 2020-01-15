@@ -68,6 +68,7 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 Figure \ref{fig:boxplotz} shows a notable variation in the Z-dimension which indicates that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than in the tails, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
 \\\\
 A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couples as illustrated below, 
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/varexp.png}
@@ -91,6 +92,20 @@ To get a visual grasp of the original data points projected onto the space of th
 
 \section{Methods}
 \textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
+
+\subsection*{Models}
+Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. 
+
+\subsubsection*{Binary Classification Tree}
+One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based Hunts algorithm, and the best split is the one with highest purity gain. The splitting ends when the splits no longer adds value to the predictions. 
+
+\subsubsection*{K-nearest neighbors}
+The second machine learning model used for classification is a K-nearest neighbor classifier. 
+
+
+\subsection*{Comparison method}
+
+\subsection*{Method for significant of effect of experiments}
 
 \section{Results}
 \textit{Present the results. \\ Tables and figures are good ways of illustrating results.}
