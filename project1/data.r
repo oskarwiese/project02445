@@ -40,14 +40,15 @@ for (i in 1:10){
 df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
 k = 0
-
+pred_tree <- rep(NA, 100)
 for (i in 1:100){
   #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
   train <- df[-i, ]
   test  <- df[i, ]
   tree_model  <- tree(person ~ . -repetition, data=train)
-  pred <- predict(tree_model,test,type="class") ;
-  if (pred == as.numeric(test[1])){
+  model_tree <- predict(tree_model,test,type="class") ;
+  pred_tree[i] <- model_tree
+  if (model_tree == as.numeric(test[1])){
     k = k + 1
   }}
 accuracy_tree <- k / 100 ; accuracy_tree
@@ -63,10 +64,12 @@ text(tree_model)
 
 #Modellen opskrives som fÃ¸lgende: model_knn <- knn(train,test,cl=train[,1],k=10)
 j=0
+pred_knn <- rep(NA, 100)
 for (i in 1:100){
   train <- df[-i, ]
   test  <- df[i, ]
-  model_knn <- knn(train,test,cl=train[,1],k=4) ;
+  model_knn <- knn(train,test,cl=train[,1],k=4)
+  pred_knn[i] <- model_knn
   if (model_knn == as.numeric(test[1])){
     j = j + 1
   }}
@@ -113,3 +116,14 @@ par(mfrow = c(1,1))
 boxplot(df[,3:102])
 boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
+
+
+# McNemar's test på KNN og decision tree
+
+#compare <- data.frame(Pred_knn = pred_knn, Pred_tree = pred_tree)
+#tab <- xtabs(data = compare)
+
+#Mcnemar <- mcnemar.test(tab)
+#Mcnemar
+
+wilcox.test(pred_knn, pred_tree, paired=TRUE)
