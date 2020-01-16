@@ -6,20 +6,30 @@ load(file = "fosfor_data.Rdata")
 data = Phosphorous ; rm(Phosphorous)
 data$location <- as.factor(data$location)
 
+# Plot af dataen i forhold til yield
+cols <- c("violet", "red", "deepskyblue3", "green", "deeppink2", "black", "gray", "darkgoldenrod", "purple")
+colsrep <- rep(cols, each = 4)
+
+par(mfrow = c(1,2))
+plot(data$DGT, data$yield, col = colsrep, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]", pch = 19)
+legend("bottomright", legend=c("Field 1", "Field 2", "Field 3", "Field 4", "Field 5", "Field 6", "Field 7", "Field 8", "Field 9"),
+       col=cols, cex=0.8, pch = 19)
+plot(data$olsenP, data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]", pch = 19)
+
 # Linear fits 
-fit1 <- lm(data$yield ~ log(data$DGT))
+fit1 <- lm(data$yield ~ data$DGT)
 summary(fit1) # r^2 = 0.4239
 
-fit2 <- lm(data$yield ~ log(data$olsenP))
+fit2 <- lm(data$yield ~ data$olsenP)
 summary(fit2) # r^2 = 0.1188
 
 par(mfrow = c(1,2))
-plot(log(data$DGT), data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
+plot(data$DGT, data$yield, col = data$location, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]")
 curve(fit1$coefficients[1] + x * fit1$coefficients[2], add = T)
 legend("bottomright", legend=c(expression(paste( r^2, " = 0.4239"))),
        col=c("black"), cex=0.8)
 
-plot(log(data$olsenP), data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
+plot(data$olsenP, data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]")
 curve(fit2$coefficients[1] + x * fit2$coefficients[2], add = T)
 legend("bottomright", legend=c(expression(paste( r^2, " = 0.1188"))),
        col=c("black"), cex=0.8)
