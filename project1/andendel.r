@@ -56,4 +56,4 @@ for (t in 1:10){
   plot(adjust_p)
   length(adjust_p[adjust_p < 0.05])
 }
-sort(p_vals)
+?pbinom

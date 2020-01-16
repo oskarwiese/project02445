@@ -103,7 +103,7 @@ Two different models are constructed in order to classify a specific test subjec
 One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based Hunts algorithm, and the best split is the one with highest purity gain. The splitting ends when the splits no longer adds value to the predictions. 
 
 \subsubsection*{K-nearest neighbors}
-The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. 
+The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment the classifier uses $ K=3 $ based on pilot experiments.
 
 \subsection*{Comparison of models}
 To statistically compare the models a McNemar test is chosen. The models are compared under the following hypothesis. 
@@ -139,7 +139,12 @@ but this is only to be interpreted along with the confidence interval given by t
 \noindent
 If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ and the p-value is significant, then model A is better than model B \cite{mlbog}.
 
-\subsection*{Are experiments significant as F?}
+\subsection*{Test-statistics}
+To test whether there is a significant effect of experiment on the resulting curve a analysis of variance is used as statistical test. 
+
+\subsubsection*{Analysis of Variance: ANOVA}
+ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables these are the person, repetition, experiment and whether its a x,y or z coordinate. The response variable is the position, i.e. the resulting curve. Thus, a four-way Anova is conducted on the data. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore there is no difference in the means og the resulting curves. The reason why an Anova test is chosen rather than a t-test is due to the fact that Anova minimizes the type I error.  
+
 
 \section{Results}
 \textit{Present the results. \\ Tables and figures are good ways of illustrating results.} \\
