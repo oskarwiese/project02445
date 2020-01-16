@@ -38,7 +38,7 @@ One natural and important question for farmers, which will be uncovered in this 
 \section{Data}
 \textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}\\
 \noindent
-The data consists of soils samples that were obtained from fields in Denmark and Norway respectively. Each field was divided into smaller subfields within the field, and barley was then sown on each of the subfields. On each of the subfields a soil sample was obtained and analyzed for bio-available phosphorus using two-methods, Olsen-P and DGT. Where Olsen-P is the traditional method and DGT is a newer and more expensive method. The data consists of four different variables: Location, yield, DGT measurement and Olsen-P measurement.  
+The data consists of soils samples that were obtained from fields in Denmark and Norway respectively. Each field was divided into smaller subfields within the field, and barley was then sown on each of the subfields. On each of the subfields a soil sample was obtained and analyzed for bio-available phosphorus using two-methods, Olsen-P and DGT. Where Olsen-P is the traditional method and DGT is a newer and more expensive method. The data consists of four different variables; Location, yield, DGT measurement and Olsen-P measurement, as well as 36 different observations, 4 from each location except for location 9, where two of the yield measurements are missing. Location is a factor, while every other variable is continuous.
 \\ \noindent 
 Since both olsen-P and DGT is a measurement for the yield, it would be suspected that there is a correlation between both of the measurements. 
 \begin{figure}[H]
@@ -47,7 +47,7 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 	\caption{Scatterplot of the DGT and olsenP measurement. The pearson correlation $ \rho $ is calculated and shows a strong relationship between the two measurements.}
 	\label{fig:dgtolsencor}
 \end{figure}
-\noindent It is seen from \ref{fig:dgtolsencor} that olsenP and DGT are indeed correlated. Hence, they both describe the same thing, but since the correlation is equal to one the two measurements techniques do differ, which will be investigated in this project. To get a visual understanding of what the yield plotted against the two different measurements 
+\noindent It is seen from \ref{fig:dgtolsencor} that olsenP and DGT are indeed correlated. Hence, they both describe the same thing, but since the correlation is not equal to one the two measurements techniques do differ, which will be investigated in this project. To get an understanding of how yield is expressed in terms of DGT and Olens P values, the yield over DGT and yield over Olsen P plots are shown below. 
 
 
 \begin{figure}[H]
@@ -57,7 +57,7 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 	\label{fig:measurementz}
 \end{figure}
 
-
+In \ref{fig:measurementz}, it is clear that low values of both DGT and Olsen P leads to a low yield, while somewhat higher values of DGT and Olsen P do not lead to much higher values of yield. This could suggest that the Michaelis-Menten model could be effective for fitting this data. This will be uncovered in the sections below.
 
 \section{Methods}
 \textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
