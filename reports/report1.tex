@@ -35,8 +35,9 @@
 
 \section{Introduction}
 \textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\ \\
-Security plays a larger role in existence every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve. \\ 
-\indent This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of t-tests and ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much taller obstacle should make people lift their arms much more dracstially.
+Security plays a larger role in existence every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve.
+
+This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of t-tests and ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much taller obstacle should make people lift their arms much more dracstially.
 
 \section{Data}
 \textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}
@@ -126,7 +127,8 @@ The p-value is then calculated using the following expression,
 p=2 \mathrm{cdf}_{\mathrm{binom}}\left(m=\min \left\{n_{12}, n_{21}\right\} | prop=\frac{1}{2}, N=n_{12}+n_{21}\right)
 \end{equation}
 \noindent
-The interpretation is that the lower p is, the more evidence there is A is better than B,but this is only to be interpreted along with the confidence interval given by the following expression.
+The interpretation is that the lower p is, the more evidence there is A is better than B,
+but this is only to be interpreted along with the confidence interval given by the following expression.
 
 \begin{equation}\label{key}
 \begin{aligned}
@@ -182,6 +184,12 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 	\end{tabular}
 \end{table}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{billeder/PredHist.png}
+	\caption{}
+	\label{fig:predhist}
+\end{figure}
 
 \section{Discussion}
 \textit{What do your results show? \\ Discuss your results. How reliable are they?}
