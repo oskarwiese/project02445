@@ -44,7 +44,7 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/dgtolsencor.png}
-	\caption{Scatterplot of the DGT and olsenP measurement}
+	\caption{Scatterplot of the DGT and olsenP measurement. The pearson correlation $ \rho $ is calculated and shows a strong relationship between the two measurements.}
 	\label{fig:dgtolsencor}
 \end{figure}
 \noindent It is seen from \ref{fig:dgtolsencor} that olsenP and DGT are indeed correlated. Hence, they both describe the same thing, but since the correlation is equal to one the two measurements techniques do differ, which will be investigated in this project. To get a visual understanding of what the yield plotted against the two different measurements 
@@ -53,7 +53,7 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/measurementz}
-	\caption{}
+	\caption{Scatter plot of the yield against measurements. On the right is a plot of the yield against the DGT measruement. On the left is a plot of the yield against the olsenP measurement.}
 	\label{fig:measurementz}
 \end{figure}
 
@@ -63,9 +63,12 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 \textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
 
 \subsubsection*{Linear Regression}
-In linear regression a linear model is fitted to the data. 
+In linear regression a model is fitted to the data. In regression the model that is to be constructed tries to fit the parameters a and b, that makes the data most likely.
 
-\[ y \approx a  \]
+\[ y \approx a \cdot x + b, \quad x \in \mathbb R  \]
+
+\noindent
+In linear regression the response and explanatory variable are both continuous. The optimal parameters for the linear fit are estimated by the maximum likelihood. That is, to minimize the sum of squares of the residuals. 
 
 \subsubsection*{Non-linear Regression}
 The second type of regression used to determine the measurement that best describes the yield is non-linear regression, which in this case was carried out using the Michaelis-Menten model, shown below.
@@ -74,7 +77,7 @@ The second type of regression used to determine the measurement that best descri
 
 
 \subsubsection*{Analysis of Covariance: ANCOVA}
-
+Analysis of covariance involves a combination of linear regression and analysis of variance(ANOVA). The response variable is continuous and at least one continuous explanatory variable and one explanatory categorical variable. The ANCOVA evaluate if the means of the response variable is equal across the categorical explanatory variable.  \cite{mlbog} 
 
 
 \section{Results}
@@ -119,7 +122,8 @@ For determining which measurement best describes the yield, the linear fits of t
 
 \section{Appendix}
 
-
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
 
 
 \end{document}
