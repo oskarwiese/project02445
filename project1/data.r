@@ -105,7 +105,7 @@ temp2 <- unlist(df[1:10,103:202])
 temp3 <- unlist(df[1:10,203:302])
 
 par(mfrow = c(1,1))
-default <- par()$mar
+default <- c(5.1, 4.1, 4.1, 2.1); default
 par(mar = c(rep(0.4,4)))
 scatter3D(temp1, temp2, temp3, theta = 220, phi = 10, xlab = "Left-right", ylab = "Back-forth", zlab = "Up-down", col = rainbow(1270), colvar = NULL, pch = 16, cex = 0.6, bty = "b2")
 par(mar = default)
