@@ -29,10 +29,13 @@ df <- data.frame(
   "person" <- as.factor(person),
   "experiment" <- as.factor(experiment)
 )
+
+
 names(df) <- c("position","xyz","repetition","person","experiment")
 df
 model <- lm(position~xyz+repetition+person+experiment,data = df)
 anova(model)
+
 
 par( mfrow=c(5,4))
 par(mar=c(1,1,1,1))
@@ -57,3 +60,43 @@ for (t in 1:10){
   length(adjust_p[adjust_p < 0.05])
 }
 ?pbinom
+
+
+
+# Not finnished 
+
+df <- data.frame(matrix(ncol=304,nrow=100*16))
+names. <- rep(NA, 304);
+names.[1] <- "position" ; names.[2] <- "person"; names.[3] <- "repetition"; names.[4] <-"experiment"
+for (k in 1:16){
+  for (i in 1:300) {
+    if (i <= 100) {
+      names.[i+4] <- paste(c("x", as.character(i)), collapse = "");
+    } else if (i <= 200) {
+      names.[i+4] <- paste(c("y", as.character(i-100)), collapse = "");
+    } else {
+      names.[i+4] <- paste(c("z", as.character(i-200)), collapse = "");
+    }
+  }}
+names.
+names(df) <- names.;
+k <- 1
+for (l in 1:16){
+  for (i in 1:10){
+   for (j in 1:10){
+      df[k, 2] <- i
+      df[k, 3] <- j
+      df[k, 4] <- l
+      exp <- armdata[[l]]
+      example <- exp[[i]][[j]]
+      example <- as.vector(example)
+      df[k,5:304] <- example 
+      k <- k+1
+  }
+}}
+df$person <- as.factor(df$person)
+df$repetition <- as.factor(df$repetition)
+df$experiment <- as.factor(df$experiment)
+anova(lm(~df$experiment+df$person+df$repetition))
+
+
