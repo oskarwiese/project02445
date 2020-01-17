@@ -7,6 +7,7 @@
 % \geometry{top=1cm}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{ragged2e}
 \usepackage{booktabs}
 \hypersetup{
 	colorlinks=true,
@@ -18,12 +19,13 @@
 \usepackage{graphicx}
 \title{Human arm trajectories in obstacle avoidance}
 \author{Oskar Eiler Wiese Christensen s183917 \\ Anders Henriksen s183904 \\ \\ 02445 Project in Statistical Evaluation of Artificial Evaluation}
-\date{\today \vspace{2.5cm} \section*{Abstract} \textit{The summary should contain a summary of the problem that  you are working with, which results you got, as well as main conclusions. \\ Don’t get into technical details. The summary should not be very long} \\ 
+\date{\today \vspace{2.5cm} \section*{\small Summary} 
+%\textit{The summary should contain a summary of the problem that  you are working with, which results you got, as well as main conclusions. \\ Don’t get into technical details. The summary should not be very long} \\ 
 %Purpose and importance of the research
 %What has been done
 %What has been found
 %Implications of the research
-Security and access authorization plays a big role in modern society. Improvement of these systems could be accomplished by using movement curves to identify the person and give access only to those with authority. The purpose of this paper is to investigate if it is possible to identify people based on movement curves by using two machine learning models, K-nearest neighbors and a binary decision tree, as well as to test if experiment has a significant effect on curve. The results show that it is to some extent possible to predict person from curve and that KNN is most effective at this task. Meanwhile, experiment has a significant effect on curve. This implies that movement curves might be useful for classifying people if using more complicated machine learning models. Meanwhile, performing different actions lead to different curves, which has positive implications for the possibility of movement-based surveillance.}
+\justify{\small Security and access authorization plays a big role in modern society. Improvement of these systems could be accomplished by using movement curves to identify the person and give access only to those with authority. The purpose of this paper is to investigate if it is possible to identify people based on movement curves by using two machine learning models, K-nearest neighbors and a binary decision tree, as well as to test if experiment has a significant effect on curve. The results show that it is to some extent possible to predict person from curve and that KNN is most effective at this task. Meanwhile, experiment has a significant effect on curve. This implies that movement curves might be useful for classifying people if using more complicated machine learning models. Meanwhile, performing different actions lead to different curves, which has positive implications for the possibility of movement-based surveillance.}}
 
 \pagestyle{plain}
 \fancyhf{}
@@ -38,14 +40,14 @@ Security and access authorization plays a big role in modern society. Improvemen
 %\tableofcontents
 
 \section{Introduction}
-\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\ \\
+\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\
 Security plays a larger role in existence every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve.
 
 This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of t-tests and ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much taller obstacle should make people lift their arms much more dracstially.
 
 \section{Data}
 \textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}
-\\\\
+\\
 %*\textbf{Description of data:}
 Ten different test subjects performed obstacle avoidance tasks on a table by relocation of a cylindrical object from position A to position B. Different experiments, with varying heights of the obstacle were executed, and the test subjects were furthermore asked to avoid the obstacle by lifting the cylindrical object at hand. The movements were recorded with VZ 4000. The trajectories of markers were recorded using a sampling rate of 110 Hz. The starting position projected to the table is considered the origin in a three dimensional space. Fifteen different obstacle avoidance experiments were conducted, with one experiment for every S,M, or T with the given measure $ d \in \{15, 22.5,  30, 37.5, 45\} $ as well as a control experiment with no obstacle. Each person repeated each of the sixteen different experiments ten times. The full data have a total size of $ m_f = 174,160 $. \cite{armdata}
 \begin{figure}[H]
@@ -202,10 +204,12 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 \end{figure}
 
 \section{Discussion}
-\textit{What do your results show? \\ Discuss your results. How reliable are they?}
+\textit{What do your results show? \\ Discuss your results. How reliable are they?} \\
 From the first table of the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.1, as expected when dealing with 10 classes, so it is clear that both of the relatively simple models are quite effective compared to random guessing. Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
 
-
+From the second table of the results, it is obvious that the two models are significantly different on a 5\% significance level, as a McNemar's test testing if the accuracies of the two models are different yields a p-values of 0.0167. This shows that if one was to choose one of the two models, the 3-nearest neighbor model would be a much better choice, as the difference between the accuracy of this model and the binary classification tree is between 0.0375 and 0.261 with a 5\% significance level. 
+\\\\
+For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense sinse position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetion is statistically significant for the curve.
 
 \section{Conclusion}
 \textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
