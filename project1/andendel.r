@@ -1,14 +1,18 @@
 rm(list=ls())
+library("ff")
 load(file = "armdata.RData")
-
+names. <- rep(NA, 300);
+  for (i in 1:300) {
+    if (i <= 100) {
+      names.[i] <- paste(c("x", as.character(i)), collapse = "");
+    } else if (i <= 200) {
+      names.[i] <- paste(c("y", as.character(i-100)), collapse = "");
+    } else {
+      names.[i] <- paste(c("z", as.character(i-200)), collapse = "");
+    }
+  }
+coordinate<-rep(names.,1600)
 raw_movement <- unlist(armdata, recursive = T)
-coordinate <- rep( c(
-  rep("x", 100),
-  rep("y", 100),
-  rep("z", 100)
-),
-1600
-) 
 repetition <- c()
 person <- c()
 experiment <- c()
@@ -31,8 +35,8 @@ df <- data.frame(
 )
 
 
+
 names(df) <- c("position","xyz","repetition","person","experiment")
-df
 model <- lm(position~xyz+repetition+person+experiment,data = df)
 anova(model)
 
@@ -66,16 +70,15 @@ for (t in 1:10){
 # Not finnished 
 
 df <- data.frame(matrix(ncol=304,nrow=100*16))
-names. <- rep(NA, 304);
-names.[1] <- "position" ; names.[2] <- "person"; names.[3] <- "repetition"; names.[4] <-"experiment"
+names. <- rep(NA, 300);
 for (k in 1:16){
   for (i in 1:300) {
     if (i <= 100) {
-      names.[i+4] <- paste(c("x", as.character(i)), collapse = "");
+      names.[i] <- paste(c("x", as.character(i)), collapse = "");
     } else if (i <= 200) {
-      names.[i+4] <- paste(c("y", as.character(i-100)), collapse = "");
+      names.[i] <- paste(c("y", as.character(i-100)), collapse = "");
     } else {
-      names.[i+4] <- paste(c("z", as.character(i-200)), collapse = "");
+      names.[i] <- paste(c("z", as.character(i-200)), collapse = "");
     }
   }}
 names.
