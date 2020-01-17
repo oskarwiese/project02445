@@ -159,6 +159,7 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 	\begin{tabular}{l r}
 		\toprule
 		Classification Model       & Accuracy  \\ \midrule
+		Baseline                   & 0.10      \\
 		3-Nearest neighbor         & 0.62      \\ 
 		Binary classification tree & 0.47      \\ \bottomrule
 	\end{tabular}
@@ -187,7 +188,7 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 		\toprule
 		Variable       & p-value                         \\ \midrule
 		Position       & $<2.200 \cdot 10^{-16}$         \\ 
-		Repetition     & $5.424 \cdot 10^{-7}$           \\ 
+		Repetition     & $<2.200 \cdot 10^{-16}$         \\ 
 		Person         & $<2.200 \cdot 10^{-16}$         \\ 
 		Experiment     & $<2.200 \cdot 10^{-16}$         \\ \bottomrule
 	\end{tabular}
@@ -202,6 +203,9 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \section{Discussion}
 \textit{What do your results show? \\ Discuss your results. How reliable are they?}
+From the first table of the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.1, as expected when dealing with 10 classes, so it is clear that both of the relatively simple models are quite effective compared to random guessing. Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
+
+
 
 \section{Conclusion}
 \textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}

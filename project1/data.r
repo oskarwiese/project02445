@@ -40,6 +40,26 @@ for (i in 1:10){
 }
 df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
+
+
+# Baseline
+k = 0
+pred_tree <- rep(NA, 100)
+for (i in 1:100){
+  #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
+  train <- df[-i, ]
+  test  <- df[i, ]
+  tree_model  <- tree(person ~ . -repetition, data=train)
+  model_tree <- predict(tree_model,test,type="class") ;
+  pred_tree[i] <- model_tree
+  if (model_tree == as.numeric(test[1])){
+    k = k + 1
+  }}
+accuracy_tree <- k / 100 ; accuracy_tree
+
+
+
+# Decision tree
 k = 0
 pred_tree <- rep(NA, 100)
 for (i in 1:100){
@@ -63,7 +83,7 @@ text(tree_model)
 
 # KNN 
 
-#Modellen opskrives som følgende: model_knn <- knn(train,test,cl=train[,1],k=10)
+# KNN model
 j=0
 pred_knn <- rep(NA, 100)
 test_val <- rep(NA,100)
