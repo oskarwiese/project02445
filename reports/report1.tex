@@ -40,19 +40,18 @@
 %\tableofcontents
 
 \section{Introduction}
-\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\
+%\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\
 Security plays a larger role in existence every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve.
 
 This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of t-tests and ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much taller obstacle should make people lift their arms much more dracstially.
 
 \section{Data}
-\textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}
-\\
+%\textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}
 %*\textbf{Description of data:}
 Ten different test subjects performed obstacle avoidance tasks on a table by relocation of a cylindrical object from position A to position B. Different experiments, with varying heights of the obstacle were executed, and the test subjects were furthermore asked to avoid the obstacle by lifting the cylindrical object at hand. The movements were recorded with VZ 4000. The trajectories of markers were recorded using a sampling rate of 110 Hz. The starting position projected to the table is considered the origin in a three dimensional space. Fifteen different obstacle avoidance experiments were conducted, with one experiment for every S,M, or T with the given measure $ d \in \{15, 22.5,  30, 37.5, 45\} $ as well as a control experiment with no obstacle. Each person repeated each of the sixteen different experiments ten times. The full data have a total size of $ m_f = 174,160 $. \cite{armdata}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{billeder/exp_pic.png}
+	\includegraphics[width=0.5\linewidth]{billeder/exp_pic.png}
 	\caption{An illustration of the obstacle avoidance setup. Test subjects have to move the cylinder from start to the finnish position "target", while avoiding the blue obstacle.}
 	\label{fig:exppic}
 \end{figure}
@@ -61,11 +60,11 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{billeder/Rplot.png}
-	\caption{An illustration of test subject 1's arm trajectories in experiment 1 repetition one through ten}
+	\caption{An illustration of test subject 1's arm trajectories in experiment one. Each of the lines in the plot illustrate a repetition in the experiment. }
 	\label{fig:rplot}
 \end{figure}
 
-%%TODO: forklare lidt om ovenstående. 
+In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is a boxplots of the variation in the Z-dimension of all the test subjects.
 
 \begin{figure}[H]
 	\centering
@@ -74,14 +73,14 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 	\label{fig:boxplotz}
 \end{figure}
 
-Figure \ref{fig:boxplotz} shows a notable variation in the Z-dimension which indicates that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than in the tails, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
+Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than in the tails, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
 \\\\
-A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couples as illustrated below, 
+A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couple of principle components as illustrated in \ref{fig:varexp}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/varexp.png}
-	\caption{}
+	\caption{A variance explained graph. The graph shows the variance explained cumulatively by the number of principle components. The red line in the plot indicates a threshold at 90\% explained variance.}
 	\label{fig:varexp}
 \end{figure}
 
@@ -100,16 +99,16 @@ To get a visual grasp of the original data points projected onto the space of th
 
 
 \section{Methods}
-\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
+%\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
 
 \subsection*{Models}
-Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. 
+Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. Thsese models are a Binary Classification Tree and a K-nearest neighbors classifier.
 
 \subsubsection*{Binary Classification Tree}
 One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based Hunts algorithm, and the best split is the one with highest purity gain. The splitting ends when the splits no longer adds value to the predictions. 
 
 \subsubsection*{K-nearest neighbors}
-The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment the classifier uses $ K=3 $ based on pilot experiments.
+The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
 
 \subsection*{Comparison of models}
 To statistically compare the models a McNemar test is chosen. The models are compared under the following hypothesis. 
@@ -146,14 +145,14 @@ but this is only to be interpreted along with the confidence interval given by t
 If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ and the p-value is significant, then model A is better than model B \cite{mlbog}.
 
 \subsection*{Test-statistics}
-To test whether there is a significant effect of experiment on the resulting curve a analysis of variance is used as statistical test. 
+To test whether there is a significant effect of experiment on the resulting curve an analysis of variance is used as a statistical test. 
 
 \subsubsection*{Analysis of Variance: ANOVA}
 ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables these are the person, repetition, experiment and whether its a x,y or z coordinate. The response variable is the position, i.e. the resulting curve. Thus, a four-way Anova is conducted on the data. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore there is no difference in the means og the resulting curves. The reason why an Anova test is chosen rather than a t-test is due to the fact that Anova minimizes the type I error. \cite{statbog}
 
 
 \section{Results}
-\textit{Present the results. \\ Tables and figures are good ways of illustrating results.} \\
+%\textit{Present the results. \\ Tables and figures are good ways of illustrating results.} \\
 Using the 3-nearest neighbor and binary classification tree models to classify the person from the curve yielded the following results.
 
 \begin{table}[h]
@@ -196,6 +195,8 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 	\end{tabular}
 \end{table}
 
+
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/PredHist.png}
@@ -204,17 +205,17 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 \end{figure}
 
 \section{Discussion}
-\textit{What do your results show? \\ Discuss your results. How reliable are they?} \\
+%\textit{What do your results show? \\ Discuss your results. How reliable are they?} \\
 From the first table of the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.1, as expected when dealing with 10 classes, so it is clear that both of the relatively simple models are quite effective compared to random guessing. Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
 
 From the second table of the results, it is obvious that the two models are significantly different on a 5\% significance level, as a McNemar's test testing if the accuracies of the two models are different yields a p-values of 0.0167. This shows that if one was to choose one of the two models, the 3-nearest neighbor model would be a much better choice, as the difference between the accuracy of this model and the binary classification tree is between 0.0375 and 0.261 with a 5\% significance level. 
 \\\\
-For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense sinse position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetion is statistically significant for the curve.
+For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense since position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetition is statistically significant for the curve. From figure \ref{fig:rplot} it is also seen that each curve in the repetition varies a notable amount, which could explain why it is statistically significant variable for the resulting curve. 
 
 \section{Conclusion}
-\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
+%\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
 
-In this paper, two important questions have been investigated. The first question is whether is possible to use a 3-nearest neighbor and binary decision tree machine learning model to classify the person performing an experiment based on the a given movement curve, and which model is best at performing this classification. Based on the accuracies of the KNN and decision tree models in comparison to baseline, it is pretty safe to say that it is possible to use a machine learning model to predict the person based on the movement curve. Especially more complex machine learning models could be very successful for this prediction task, but actually implementing these more complicated models has been left for future work. For comparing the two models to each other, McNemar's test has been used, which showed that there is a significant difference in the accuracies of the two models. As such, if one of the two models produced in this paper should be used to classify the person, the KNN model is reccomended.
+In this paper, two important questions have been investigated. The first question is whether is possible to use a 3-nearest neighbor and binary decision tree machine learning model to classify the person performing an experiment based on the a given movement curve, and which model is best at performing this classification. Based on the accuracies of the KNN and decision tree models in comparison to baseline, it is pretty safe to say that it is possible to use a machine learning model to predict the person based on the movement curve. Especially more complex machine learning models could be very successful for this prediction task, but actually implementing these more complicated models has been left for future work. For comparing the two models to each other, McNemar's test has been used, which showed that there is a significant difference in the accuracies of the two models. As such, if one of the two models produced in this paper should be used to classify the person, the KNN model is recommended.
 
 The second question was if the performed experiment had a significant effect on the resulting movement curve. To investigate this problem, ANOVA has been performed, and it was extremely evident that there is a huge significance of position, repetition, person and experiment on the resulting curve. For future papers, it could be interesting to use other test statistics to reinforce this result. From the result of ANOVA, it is clear that experiment has an effect on how the curve turns out, which can be thought of as logical, since the experiments vary in obstacle sizes. Therefore, the subject has to use arm movements of varying sizes to move the object over the obstacle, resulting in a vastly different curve.
 
