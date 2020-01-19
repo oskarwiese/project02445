@@ -37,13 +37,13 @@
 %\tableofcontents
 
 \section{Introduction}
-\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\ \\
+%\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\ \\
 The world is overpopulating. The population has grown exponentially over time while the surface of earth has naturally stayed constant. People have ever increasing problems with having enough space, both for living and agriculture. The latter will undoubtedly lead to huge agricultural problems, especially underproduction. One way to solve this issue could be to get a larger amount of cultivated land, which is not an effective long term solution as the population grows and the skirmish for proper households becomes ever tougher. The other option is to get more bang for your buck, or in other terms, getting a bigger yield from the same amount of land. There are many different ways of accomplishing this, but one would be to make sure to have large amounts of unbounded phosphate in the soil of the farmland, as this is a necessary nutrient for plant growth. Two possible measurements for this phosphorous amount are Olsen P and the newer, although more expensive, DGT measures. 
 
 One natural and important question for farmers, which will be uncovered in this paper, is whether one measure is significantly different than the other and which measure is best, which will be determined by finding the measure with the lowest error on a non-linear fit to the data. Meanwhile, another interesting question for this paper is if the phosphorous amount even has a significant influence on the yield of the farms, which can be uncovered by a simple use of ANCOVA. The hypothesis prior to the carrying out of the experiments is that DGT should be a better measurement for determining the amount of bioavailable phosphorous is the soil, as this method is both more expensive and newer. Meanwhile, it is expected that the amount of bioavailable phosphorous should have a significant effect on the yield, as more plant nutrients should lead to bigger and stronger plants.
 
 \section{Data}
-\textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}\\
+%\textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}\\
 \noindent
 The data consists of soils samples that were obtained from fields in Denmark and Norway respectively. Each field was divided into smaller subfields within the field, and barley was then sown on each of the subfields. On each of the subfields a soil sample was obtained and analyzed for bio-available phosphorus using two-methods, Olsen-P and DGT. Where Olsen-P is the traditional method and DGT is a newer and more expensive method. The data consists of four different variables; Location, yield, DGT measurement and Olsen-P measurement, as well as 36 different observations, 4 from each location except for location 9, where two of the yield measurements are missing. Location is a factor, while every other variable is continuous.
 \\ \noindent 
@@ -67,7 +67,7 @@ Since both olsen-P and DGT is a measurement for the yield, it would be suspected
 In \ref{fig:measurementz}, it is clear that low values of both DGT and Olsen P leads to a low yield, while somewhat higher values of DGT and Olsen P do not lead to much higher values of yield. This could suggest that the Michaelis-Menten model could be effective for fitting this data. This will be uncovered in the sections below.
 
 \section{Methods}
-\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}\\\\ 
+%\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}\\\\ 
 To make a relevant recommendation for farmers in order to choose between the two measurements DGT and olsenP, the data for the measurements respectively is fitted to both a linear model and a non-linear model. To investigate wheter the amount of bioavailable phosphorous influence the harvest yield a analysis of covariance is conducted.
 
 \subsubsection*{Linear Regression}
@@ -89,7 +89,7 @@ Analysis of covariance involves a combination of linear regression and analysis 
 
 
 \section{Results}
-\textit{Present the results. \\ Tables and figures are good ways of illustrating results.}
+%\textit{Present the results. \\ Tables and figures are good ways of illustrating results.}
 
 For determining which measurement best describes the yield, the linear fits of the yield over DGT and yield over olsen P with accompanying $r^2$-values are shown below.
 
@@ -139,7 +139,7 @@ A way to determine if its worth investing in the DGT measurement would be to con
 
 
 \section{Conclusion}
-\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
+%\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
 
 The purpose of this project has been to determine whether the DGT measurement is significantly better then OlsenP. To uncover the truth, the MSE of the non-linear fit of the yield against DGT and OlsenP respectively showed that DGT has a lower MSE. Thus, DGT-measurement describes the yield better than the OlsenP. However, there is no way to tell if DGT is significantly better than OlsenP. Furthermore, the analysis of covariance shows that both of the measurements describes the yield significantly. The ANCOVA reveals that the amount of bioavailable phsphorus influence the harvest yield. In conclusion, using DGT over OlsenP is only a recommendation due to the fact that there is no way to tell if one of the measurements are significantly better than the other. Since the DGT is more expensive than the traditional OlsenP measurement an analysis of the cost-benefit as well as more data would yield a more precise conclusion and guidance to the farmers who need the knowledge of the efficiency of the two measurements.
 
