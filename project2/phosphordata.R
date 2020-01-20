@@ -13,8 +13,8 @@ colsrep <- rep(cols, each = 4)
 par(mfrow = c(1,2))
 plot(data$DGT, data$yield, col = colsrep, xlab = expression(paste("DGT [",mu, "g/L]")), ylab = "Yield [hkg/ha]", pch = 19)
 legend("bottomright", legend=c("Field 1", "Field 2", "Field 3", "Field 4", "Field 5", "Field 6", "Field 7", "Field 8", "Field 9"),
-       col=cols, cex=0.8, pch = 19)
-plot(data$olsenP, data$yield, col = data$location, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]", pch = 19)
+       col=cols, cex=0.7, pch = 19)
+plot(data$olsenP, data$yield, col = colsrep, xlab = "olsenP [mg/hg]", ylab = "Yield [hkg/ha]", pch = 19)
 
 # Linear fits 
 fit1 <- lm(data$yield ~ data$DGT)

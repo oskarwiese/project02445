@@ -37,69 +37,33 @@ df <- data.frame(
 
 
 names(df) <- c("position","xyz","repetition","person","experiment")
-model <- lm(position~xyz+repetition+person+experiment,data = df)
-anova(model)
 
+  
 
-par( mfrow=c(5,4))
-par(mar=c(1,1,1,1))
-for (t in 1:10){
-  person_num <- t
-  k=1
-  p_vals <- c(rep(NA,120))
-  for (i in 1:15){
-    for (j in i:16){
-      if (i != j){
-        x <- subset.data.frame(df,df$person == person_num & df$experiment == i)$position
-        y <- subset.data.frame(df,df$person == person_num & df$experiment == j)$position
-        p_val <- t.test(x,y,paired = T)$p.value
-        p_vals[k] <- p_val
-        k = k +1 
-      }}
-  }
-  plot(sort(p_vals))
-  length(p_vals[p_vals < 0.05])
-  adjust_p <- p.adjust(sort(p_vals),method = "BH")
-  plot(adjust_p)
-  length(adjust_p[adjust_p < 0.05])
-}
-?pbinom
+index <- as.vector(df$xyz)
 
-
-
+par(mar=c(1,1,2,2))
+par(mfrow=c(4,5))
+p_vals <- c(rep(NA,300))
+for (i in 1:300){
+      x <- subset.data.frame(df,df$xyz == index[298])
+      model <- lm(x$position ~ x$experiment + x$person) ; hist(model$residuals)
+      an <- anova(model)
+      p_vals[i] <- an$'Pr(>F)'[1]
+      
+      if (i %% 30 == 0){
+        hist(model$residuals)
+        qqnorm(model$residuals)
+        qqline(model$residuals) 
+      }
+} ; 
+p_vals <- sort(p_vals) ;
+adjust_p <- p.adjust(p_vals, method="BH") ; plot(adjust_p)
+par(mfrow=c(1,2)) ; hist(model$residuals); qqnorm(model$residuals);qqline(model$residuals)
+length(adjust_p[adjust_p<0.05])/300
+?p.adjust
 # Not finnished 
 
-df <- data.frame(matrix(ncol=304,nrow=100*16))
-names. <- rep(NA, 300);
-for (k in 1:16){
-  for (i in 1:300) {
-    if (i <= 100) {
-      names.[i] <- paste(c("x", as.character(i)), collapse = "");
-    } else if (i <= 200) {
-      names.[i] <- paste(c("y", as.character(i-100)), collapse = "");
-    } else {
-      names.[i] <- paste(c("z", as.character(i-200)), collapse = "");
-    }
-  }}
-names.
-names(df) <- names.;
-k <- 1
-for (l in 1:16){
-  for (i in 1:10){
-   for (j in 1:10){
-      df[k, 2] <- i
-      df[k, 3] <- j
-      df[k, 4] <- l
-      exp <- armdata[[l]]
-      example <- exp[[i]][[j]]
-      example <- as.vector(example)
-      df[k,5:304] <- example 
-      k <- k+1
-  }
-}}
-df$person <- as.factor(df$person)
-df$repetition <- as.factor(df$repetition)
-df$experiment <- as.factor(df$experiment)
-anova(lm(~df$experiment+df$person+df$repetition))
 
+  
 
