@@ -41,14 +41,14 @@
 
 \section{Introduction}
 %\textit{Briefly introduce the background and setting of the problem, as well as the aim of the report. Furthermore, you could give a very short description of the analysis that will be applied.} \\
-Security plays a larger role in existence every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve.
+Security plays a larger role in life every year, whether used for personal security or for the governmental spying on billions. Throughout the years, sercurity has taken many forms like facial and voice recognition, but movement recognition, if it proves successful, could turn out to be an effective way of finding perpetrators of crimes or locking people into their own homes. For this to truly be effective, it should be possible to classify people based on their movements and maybe even recognize actions based on the motion curve.
 
-This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of t-tests and ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much taller obstacle should make people lift their arms much more dracstially.
+This is exactly what is wished to be accomplished in this paper; Classify the person performing the action based on the given motion curve using decision trees and K-nearest neighbors, and analyzing whether the type of obstacle has an influence on the resulting curve by the use of ANOVA. For this, the focus has been specifically on the arm movement dataset from \textbf{Grimme et al. 2014}. The hypothesis prior to the carrying out of the experiment was that it should be possible to classify the person based on the curve, since people can move in substantially different ways. It is also expected that experiment should play a significant role on the resulting curve, since a much larger obstacle should make people lift their arms much more dracstially.
 
 \section{Data}
 %\textit{Describe of the data you are analyzing. What kinds of data do you have, how were they collected (if applicable)? \\ Include a few good plots to highlight important features in data. You can put additional plots in the appendix.}
 %*\textbf{Description of data:}
-Ten different test subjects performed obstacle avoidance tasks on a table by relocation of a cylindrical object from position A to position B. Different experiments, with varying heights of the obstacle were executed, and the test subjects were furthermore asked to avoid the obstacle by lifting the cylindrical object at hand. The movements were recorded with VZ 4000. The trajectories of markers were recorded using a sampling rate of 110 Hz. The starting position projected to the table is considered the origin in a three dimensional space. Fifteen different obstacle avoidance experiments were conducted, with one experiment for every S,M, or T with the given measure $ d \in \{15, 22.5,  30, 37.5, 45\} $ as well as a control experiment with no obstacle. Each person repeated each of the sixteen different experiments ten times. The full data have a total size of $ m_f = 174,160 $. \cite{armdata}
+Ten different test subjects performed obstacle avoidance tasks on a table by relocation of a cylindrical object from position A to position B. Different experiments, with varying heights of the obstacle, were executed, and the test subjects were furthermore asked to avoid the obstacle by lifting the cylindrical object at hand. The movements were recorded with VZ 4000. The trajectories of markers were recorded using a sampling rate of 110 Hz. The starting position projected to the table is considered the origin in a three dimensional space. Fifteen different obstacle avoidance experiments were conducted, with one experiment for every combination of the blocks S,M, or T with the given measure $ d \in \{15, 22.5,  30, 37.5, 45\} $ as well as a control experiment with no obstacle. Each person repeated each of the sixteen different experiments ten times. The full data has a total size of $ m_f = 174,160 $. \cite{armdata}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{billeder/exp_pic.png}
@@ -64,7 +64,7 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 	\label{fig:rplot}
 \end{figure}
 
-In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is a boxplots of the variation in the Z-dimension of all the test subjects.
+In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is shown a boxplots of the variation in the Z-dimension of all the test subjects.
 
 \begin{figure}[H]
 	\centering
@@ -73,7 +73,7 @@ In figure \ref{fig:rplot} the path of the arm trajectories indicates that just i
 	\label{fig:boxplotz}
 \end{figure}
 
-Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than in the tails, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
+Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than at the beginning and end of the movement curve, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
 \\\\
 A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couple of principle components as illustrated in \ref{fig:varexp}.
 
@@ -86,7 +86,7 @@ A principle component analysis is done in order to investigate the dimensionalit
 
 In order to explain 90 \% of the variation of the data, the first eight principle components are needed, which also can be noted from figure \ref{fig:varexp}. By having a great proportion of the variance explained by relatively few principle components it seems possible to construct a classifier in order to determine a person from his/her trajectory paths.
 \\
-To get a visual grasp of the original data points projected onto the space of the principle components, a scatter plot of the transformed data in the principle component space is plotted as seen below,
+To get a visual grasp of the original data points projected onto the space of the principle components, a scatter plot of the transformed data in the principle component space is plotted, as seen below.
 
 \begin{figure}[H]
 	\centering
@@ -105,19 +105,19 @@ To get a visual grasp of the original data points projected onto the space of th
 Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. Thsese models are a Binary Classification Tree and a K-nearest neighbors classifier.
 
 \subsubsection*{Binary Classification Tree}
-One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based Hunts algorithm, and the best split is the one with highest purity gain. The splitting ends when the splits no longer adds value to the predictions. 
+One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based on Hunt's algorithm, and the best split is the one with the highest purity gain. The splitting ends when the splits no longer add value to the predictions. 
 
 \subsubsection*{K-nearest neighbors}
-The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing the all of data. When the model predicts it chooses the K-nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
+The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing all of the data. When the model predicts, it chooses the K nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting, and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment, the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
 
 \subsection*{Comparison of models}
-To statistically compare the models a McNemar test is chosen. The models are compared under the following hypothesis. 
+To statistically compare the models, a McNemar's test is chosen. The models are compared under the following hypothesis. 
 
 \begin{align*}\label{key}
 H_0 : & \hat \theta_1 =  \hat \theta_2 \\
 H_1 : & \hat \theta_1 \neq  \hat \theta_2
 \end{align*}
-Where $ \hat \theta_1 $ and $ \hat \theta_2  $ is the estimated accuracy of models. The \textbf{n} matrix is calculated as, 
+Where $ \hat \theta_1 $ and $ \hat \theta_2  $ are the estimated accuracies of the models. The \textbf{n} matrix is calculated as, 
 \begin{equation*}\label{key}
 \begin{aligned}
 n_{11} &=\sum_{i=1}^{n} c_{i}^{A} c_{i}^{B} \qquad= \{ \text{Both classifiers are correct} \} \\
@@ -132,8 +132,7 @@ The p-value is then calculated using the following expression,
 p=2 \mathrm{cdf}_{\mathrm{binom}}\left(m=\min \left\{n_{12}, n_{21}\right\} | prop=\frac{1}{2}, N=n_{12}+n_{21}\right)
 \end{equation}
 \noindent
-The interpretation is that the lower p is, the more evidence there is A is better than B,
-but this is only to be interpreted along with the confidence interval given by the following expression.
+The interpretation is that the lower p is, the more evidence there is for A being better than B, but this is only to be interpreted along with the confidence interval given by the following expression.
 
 \begin{equation}\label{key}
 \begin{aligned}
@@ -148,7 +147,7 @@ If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ an
 To test whether there is a significant effect of experiment on the resulting curve an analysis of variance is used as a statistical test. 
 
 \subsubsection*{Analysis of Variance: ANOVA}
-ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables these are the person, repetition, experiment and whether its a x,y or z coordinate. The response variable is the position, i.e. the resulting curve. Thus, a four-way Anova is conducted on the data. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore there is no difference in the means og the resulting curves. The reason why an Anova test is chosen rather than a t-test is due to the fact that Anova minimizes the type I error. \cite{statbog}
+ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables, namely the person, repetition, experiment and whether it is an x,y or z coordinate. The response variable is the position, i.e. the resulting curve. Thus, a four-way Anova is conducted on the data. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore, there is no difference in the means of the resulting curves. The reason why an Anova test is chosen rather than a t-test is due to the fact that Anova minimizes the type I error. \cite{statbog}
 
 
 \section{Results}
