@@ -1,6 +1,6 @@
 rm(list=ls())
-
-set.seed(59)
+# 43
+set.seed(47)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -105,15 +105,14 @@ s<-summary(pca)
 par(mfrow=c(1,1))
 plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explained")
 curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
-install.packages("remotes")
-library(remotes)
-remotes::install_github('vqv/ggbiplot')
-library(ggbiplot)
+#install.packages("remotes")
+#library(remotes)
 #remotes::install_github('vqv/ggbiplot')
-ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
-ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
-df[1:10,]
+
+#library(ggbiplot)
+#ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
+#ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
 
 
