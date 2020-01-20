@@ -15,7 +15,7 @@ library(plot3D)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/src/project1")
 
 
-# Forberedning af data
+# Forberedelse af data
 load(file = "armdata.RData")
 exp_num <- 6
 exp6 <- armdata[[exp_num]]
