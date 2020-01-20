@@ -1,19 +1,24 @@
 rm(list=ls())
-
 set.seed(50)
+
+#remotes::install_github('vqv/ggbiplot')
+#install.packages("remotes")
+#install.packages("plot3D")
+
 library(class)
 library(tree)
+library(remotes)
+library(ggbiplot)
+library(plot3D)
+
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
 
 
+# Forberedning af data
 load(file = "armdata.RData")
 exp_num <- 6
 exp6 <- armdata[[exp_num]]
-# Example er person 1, rep 1 ; SOM HER exp6[[person]][[rep]]
-example <- exp6[[1]][[1]]
-summary(example)
-#as.vector(example)
-# Opretter en dataframe, hvor vi har p , r, x ,y ,z
+
 df <- data.frame(matrix(ncol=302,nrow=100))
 names. <- rep(NA, 302);
 names.[1] <- "person"; names.[2] <- "repetition";
@@ -42,6 +47,7 @@ df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
 
 
+
 # Baseline
 k = 0
 pred_base <- rep(NA, 100)
@@ -62,7 +68,7 @@ accuracy_base <- k / 100 ; accuracy_base
 k = 0
 pred_tree <- rep(NA, 100)
 for (i in 1:100){
-  #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
+
   train <- df[-i, ]
   test  <- df[i, ]
   tree_model  <- tree(person ~ . -repetition, data=train)
@@ -73,16 +79,14 @@ for (i in 1:100){
   }}
 accuracy_tree <- k / 100 ; accuracy_tree
 
-# Nu har vi lÃ¦rt at plot med data frame ;( )
-#plot(as.numeric(df[1,3:102]),as.numeric(df[1,103:202]))
+
+# Et eksempel på en tree model
 tree_model  <- tree(person ~ . -repetition, data=train)
 plot(tree_model)
 text(tree_model)
-#summary(tree_model)
-
-
 set.seed(50)
-# KNN 
+
+
 
 # KNN model
 j=0
@@ -99,38 +103,36 @@ for (i in 1:100){
   }}
 accuracy_knn = j /100 ; accuracy_knn
 
-#Lidt pca 
 
+
+# PCA
 pca <- prcomp(df[,3:302], center = T, scale. = T)
 s<-summary(pca)
 par(mfrow=c(1,1))
 plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explained")
 curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
-#install.packages("remotes")
-#library(remotes)
-#remotes::install_github('vqv/ggbiplot')
 
 
-#library(ggbiplot)
-#ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
-#ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
+# Plot af principalakserne på de to første principalkomponenter
+ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
+ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
 
 
-#install.packages("plot3D")
-library(plot3D)
-
+# 3D plot af movement curve i alle 10 repetitions for 1 person
 temp1 <- unlist(df[1:10,3:102])
 temp2 <- unlist(df[1:10,103:202])
 temp3 <- unlist(df[1:10,203:302])
 
 par(mfrow = c(1,1))
-default <- c(5.1, 4.1, 4.1, 2.1); default
+default <- c(5.1, 4.1, 4.1, 2.1)
 par(mar = c(rep(0.4,4)))
 scatter3D(temp1, temp2, temp3, theta = 220, phi = 10, xlab = "Left-right", ylab = "Back-forth", zlab = "Up-down", col = rainbow(1270), colvar = NULL, pch = 16, cex = 0.6, bty = "b2")
 par(mar = default)
 
 
+
+# Sammenligning af alle 10 repetitions for 2 forskellige personer
 par(mfrow = c(1,1))
 plot(as.numeric(df[1,3:102]), as.numeric(df[1,203:302]), type = "l", xlab = "Left-right movement", ylab = "Up-down movement", main = "Comparison of arm movement of two people")
 for(i in 2:10){
@@ -144,20 +146,14 @@ legend("bottom", legend=c("Person 1", "Person 2"),
        col=c("black", "red"), lty=1:2, cex=0.8)
 
 
+
+# Boxplots af variansen mellem forskellige dimensioner af movement curve
 par(mfrow = c(1,1))
 boxplot(df[,3:102])
 boxplot(df[,103:202], main = "Distributions of movement")
 boxplot(df[,203:302])
 
 
-# McNemar's test p? KNN og decision tree
-
-wilcox.test(pred_knn, pred_tree, paired=TRUE)
-
-par(mfrow = c(1,3))
-hist(pred_knn, breaks = seq(0,10,1), ylim = c(0,18))
-hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
-hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
 
 # En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
 # model2 = tree
