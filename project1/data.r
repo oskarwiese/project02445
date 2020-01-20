@@ -42,20 +42,20 @@ df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
 
 
+
 # Baseline
 k = 0
-pred_tree <- rep(NA, 100)
+pred_base <- rep(NA, 100)
+vals <- seq(1,10,1)
 for (i in 1:100){
-  #sample <- sample.int(n = nrow(df), size = floor(splitting[i]*nrow(df)), replace = F);
-  train <- df[-i, ]
+
   test  <- df[i, ]
-  tree_model  <- tree(person ~ . -repetition, data=train)
-  model_tree <- predict(tree_model,test,type="class") ;
-  pred_tree[i] <- model_tree
-  if (model_tree == as.numeric(test[1])){
+  val <- sample(vals,1)
+  pred_base[i] <- val
+  if (val == as.numeric(test[1])){
     k = k + 1
   }}
-accuracy_tree <- k / 100 ; accuracy_tree
+accuracy_base <- k / 100 ; accuracy_base
 
 
 
@@ -105,9 +105,9 @@ s<-summary(pca)
 par(mfrow=c(1,1))
 plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explained")
 curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
-#install.packages("remotes")
-#library(remotes)
-#remotes::install_github('vqv/ggbiplot')
+install.packages("remotes")
+library(remotes)
+remotes::install_github('vqv/ggbiplot')
 library(ggbiplot)
 #remotes::install_github('vqv/ggbiplot')
 ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
@@ -171,6 +171,7 @@ n[3] <- sum(othertrue, na.rm = T)
 notrue <- pred_knn != test_val & pred_tree != test_val
 n[4] <- sum(notrue, na.rm = T)
 N <- 100
+n
 
 theta <- (n[2] - n[3]) / N ; theta
 Q <- (N^2 * (N + 1) * (theta + 1) * (1 - theta)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
@@ -181,7 +182,9 @@ lower <- 2 * qbeta(0.025, p, q)-1
 upper <- 2 * qbeta(0.975, p, q)-1
 c(lower, theta, upper)
 
-2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
+pval <- 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2); pval
+
+
 
 
 # Tester normalfordeling for x
