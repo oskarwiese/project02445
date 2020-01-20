@@ -172,9 +172,9 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 		Baseline                   & 0.10      \\
 		3-Nearest neighbor         & 0.62      \\ 
 		Binary classification tree & 0.47      \\ \bottomrule
-		\caption{The accuracies of the three models}
-		\label{accuracies}
 	\end{tabular}
+\caption{The accuracies of the three models}
+\label{accuracies}
 \end{table}
 
 \noindent To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
@@ -190,6 +190,8 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 		p-value        & 0.0167                         \\ 
 		CI             & $0.0375 \leq 0.150 \leq 0.261$ \\ \bottomrule
 	\end{tabular}
+\caption{Statistics for difference in accuracies between KNN and decision tree}
+\label{measuresKNNDT}
 \end{table}
 
 \noindent Using ANOVA, the following results have been gathered for investigating whether the experiment has a significant effect on the resulting curve.
@@ -204,6 +206,8 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 		Person         & $<2.200 \cdot 10^{-16}$         \\ 
 		Experiment     & $<2.200 \cdot 10^{-16}$         \\ \bottomrule
 	\end{tabular}
+\caption{p-values for significance of variable on resulting curve}
+\label{p-values}
 \end{table}
 
 
