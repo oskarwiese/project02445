@@ -80,7 +80,7 @@ for (i in 1:100){
 accuracy_tree <- k / 100 ; accuracy_tree
 
 
-# Et eksempel på en tree model
+# Et eksempel pÃ¥ en tree model
 tree_model  <- tree(person ~ . -repetition, data=train)
 plot(tree_model)
 text(tree_model)
@@ -113,7 +113,7 @@ plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explain
 curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
 
 
-# Plot af principalakserne på de to første principalkomponenter
+# Plot af principalakserne pÃ¥ de to fÃ¸rste principalkomponenter
 ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
 ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
