@@ -196,19 +196,13 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \noindent Using ANOVA, the following results have been gathered for investigating whether the experiment has a significant effect on the resulting curve.
 
-\begin{table}[H]
+\begin{figure}
 	\centering
-	\begin{tabular}{l r}
-		\toprule
-		Variable       & p-value                         \\ \midrule
-		Position       & $<2.200 \cdot 10^{-16}$         \\ 
-		Repetition     & $<2.200 \cdot 10^{-16}$         \\ 
-		Person         & $<2.200 \cdot 10^{-16}$         \\ 
-		Experiment     & $<2.200 \cdot 10^{-16}$         \\ \bottomrule
-	\end{tabular}
-\caption{p-values for significance of variable on resulting curve}
-\label{p-values}
-\end{table}
+	\includegraphics[width=0.7\linewidth]{billeder/pvals_res.png}
+	\caption{}
+	\label{fig:pvalsres}
+\end{figure}
+
 
 
 
@@ -224,8 +218,18 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 From the first table of the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.1, as expected when dealing with 10 classes, so it is clear that both of the relatively simple models are quite effective compared to random guessing. Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
 
 From the second table of the results, it is obvious that the two models are significantly different on a 5\% significance level, as a McNemar's test testing if the accuracies of the two models are different yields a p-values of 0.0167. This shows that if one was to choose one of the two models, the 3-nearest neighbor model would be a much better choice, as the difference between the accuracy of this model and the binary classification tree is between 0.0375 and 0.261 with a 5\% significance level. 
+%\\\\
+%For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense since position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetition is statistically significant for the curve. From figure \ref{fig:rplot} it is also seen that each curve in the repetition varies a notable amount, which could explain why it is statistically significant variable for the resulting curve. 
 \\\\
-For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense since position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetition is statistically significant for the curve. From figure \ref{fig:rplot} it is also seen that each curve in the repetition varies a notable amount, which could explain why it is statistically significant variable for the resulting curve. 
+For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed 300 times, which results in the plot seen in figure \ref{fig:pvalsres}. From the results 86.67 \% of the p-values are below the desired level of significance. Here it is very obvious that experiment is indeed significant. This would imply that experiment has a great effect of how the curve ends up looking.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{billeder/StadigNormalfordeltAF.png}
+	\caption{This figure shows some of the residuals from the ANOVA models constructed. Furthermore, it is seen that most the residuals from the constructed models are normally distributed. }
+	\label{fig:stadignormalfordeltaf}
+\end{figure}
+ Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ and only 5\% of the p-values need to be below $ \alpha $ in order for experiment to be significant for the resulting curve. Thus, if some of the p-values are removed one could argument that experiment still would be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
+
 
 \section{Conclusion}
 %\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
