@@ -46,16 +46,14 @@ par(mar=c(1,1,2,2))
 par(mfrow=c(4,5))
 p_vals <- c(rep(NA,300))
 for (i in 1:300){
-      x <- subset.data.frame(df,df$xyz == index[298])
+      x <- subset.data.frame(df,df$xyz == index[i])
       model <- lm(x$position ~ x$experiment + x$person) ; hist(model$residuals)
       an <- anova(model)
       p_vals[i] <- an$'Pr(>F)'[1]
       
-      if (i %% 30 == 0){
         hist(model$residuals)
         qqnorm(model$residuals)
         qqline(model$residuals) 
-      }
 } ; 
 p_vals <- sort(p_vals) ;
 adjust_p <- p.adjust(p_vals, method="BH") ; plot(adjust_p)
@@ -64,6 +62,22 @@ length(adjust_p[adjust_p<0.05])/300
 ?p.adjust
 # Not finnished 
 
-
+# JUST FOR PLOTTING
+#par(mar=c(1,1,2,2))
+par(mar = c(4.1, 2.1, 2.1, 2.1))
+par(mfrow=c(4,4))
+p_vals <- c(rep(NA,300))
+for (i in round(seq(1,300,length = 8))){
+  x <- subset.data.frame(df,df$xyz == index[i])
+  model <- lm(x$position ~ x$experiment + x$person)
+  an <- anova(model)
+  p_vals[i] <- an$'Pr(>F)'[1]
   
-
+  hist(model$residuals, main = NULL, xlab = paste(index[i], "model residuals"), prob = T)
+  x <- model$residuals
+  fit <- fitdistr(x, "normal")
+  para <- fit$estimate
+  curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
+  qqnorm(model$residuals, main = NULL)
+  qqline(model$residuals) 
+}
