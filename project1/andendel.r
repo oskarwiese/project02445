@@ -55,7 +55,7 @@ adjust_p <- p.adjust(p_vals, method="BH")
 par(mfrow = c(1,1))
 length(adjust_p[adjust_p<0.05])/300 # 0.8666667
 plot(adjust_p, xlab = "Index", ylab = "Adjusted p-value")
-legend("topleft", legend = expression(paste("p-values under ", alpha, "= 0.8666667% ")))
+legend("topleft", legend = expression(paste("p-values under ", alpha, "= 86.67% ")))
 curve(0.05 + 0 * x, pch = 2, from = -10,to = 310, col = "red", lty = 2, add = T)
 
 

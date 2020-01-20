@@ -197,7 +197,7 @@ library(MASS)
 par(mar = c(4.1, 2.1, 2.1, 2.1))
 par(mfrow = c(3,5))
 for (i in round(seq(3,102,length = 5))){
-    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("x", i), ylab = NULL)
+    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("x", i - 2), ylab = NULL)
     Axis(side = 1, labels = F)
     Axis(side = 2, labels = F)
     x <- df[,i]
@@ -207,7 +207,7 @@ for (i in round(seq(3,102,length = 5))){
 }
 # Tester normalfordeling for y
 for (i in round(seq(103,202,length = 5))){
-    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("y", i), ylab = NULL)
+    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("y", i - 102), ylab = NULL)
     Axis(side = 1, labels = F)
     Axis(side = 2, labels = F)
     x <- df[,i]
@@ -218,7 +218,7 @@ for (i in round(seq(103,202,length = 5))){
 # Tester normalfordeling for z
 for (i in round(seq(203,302,length = 5))){
   
-  hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("z", i), ylab = NULL)
+  hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("z", i - 202), ylab = NULL)
   Axis(side = 1, labels = F)
   Axis(side = 2, labels = F)
   x <- df[,i]
