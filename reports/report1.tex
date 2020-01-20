@@ -228,7 +228,9 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \section{Discussion}
 %\textit{What do your results show? \\ Discuss your results. How reliable are they?} \\
-From the first table of the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.1, as expected when dealing with 10 classes, so it is clear that both of the relatively simple models are quite effective compared to random guessing. Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
+From \ref{accuracies} in the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.12, which is close to what is expected when dealing with 10 classes. Performing three McNemar's
+
+Therefore, it would be reasonable to expect that a more complex model like a neural network would get a usable accuracy.
 
 From the second table of the results, it is obvious that the two models are significantly different on a 5\% significance level, as a McNemar's test testing if the accuracies of the two models are different yields a p-values of 0.0167. This shows that if one was to choose one of the two models, the 3-nearest neighbor model would be a much better choice, as the difference between the accuracy of this model and the binary classification tree is between 0.0375 and 0.261 with a 5\% significance level. 
 %\\\\
