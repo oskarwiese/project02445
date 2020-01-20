@@ -194,29 +194,31 @@ mcnemar(pred_tree, pred_base)
 
 library(MASS)
 # Tester normalfordeling for x
-par(mfrow = c(10,10))
+par(mar = c(1,1,1,1))
+par(mfrow = c(6,5))
 for (i in 3:102){
-  
-  hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n")
-  Axis(side = 1, labels = F)
-  Axis(side = 2, labels = F)
-  x <- df[,i]
-  fit <- fitdistr(x, "normal")
-  para <- fit$estimate
-  curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
+  if (i-2 %% 10) {
+    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n")
+    Axis(side = 1, labels = F)
+    Axis(side = 2, labels = F)
+    x <- df[,i]
+    fit <- fitdistr(x, "normal")
+    para <- fit$estimate
+    curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
+  }
 }
 # Tester normalfordeling for y
 par(mfrow = c(10,10))
 for (i in 103:202){
-  
-  hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n")
-  Axis(side = 1, labels = F)
-  Axis(side = 2, labels = F)
-  x <- df[,i]
-  fit <- fitdistr(x, "normal")
-  para <- fit$estimate
-  curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
-  
+  if (i-102 %% 10) {
+    hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n")
+    Axis(side = 1, labels = F)
+    Axis(side = 2, labels = F)
+    x <- df[,i]
+    fit <- fitdistr(x, "normal")
+    para <- fit$estimate
+    curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
+  }
 }
 # Tester normalfordeling for z
 par(mfrow = c(10,10))
