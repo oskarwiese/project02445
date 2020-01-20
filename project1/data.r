@@ -1,6 +1,6 @@
 rm(list=ls())
 
-set.seed(59)
+set.seed(50)
 library(class)
 library(tree)
 #setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
@@ -42,7 +42,6 @@ df$person <- as.factor(df$person)
 df$repetition <- as.factor(df$repetition)
 
 
-
 # Baseline
 k = 0
 pred_base <- rep(NA, 100)
@@ -81,6 +80,8 @@ plot(tree_model)
 text(tree_model)
 #summary(tree_model)
 
+
+set.seed(50)
 # KNN 
 
 # KNN model
@@ -105,15 +106,14 @@ s<-summary(pca)
 par(mfrow=c(1,1))
 plot(s$importance[3,1:15],xlab = "Principle Component", ylab = "Variance Explained")
 curve(0.9+0*x,pch=2,from=0,to=16,col="red",lty=2,add=T)
-install.packages("remotes")
-library(remotes)
-remotes::install_github('vqv/ggbiplot')
-library(ggbiplot)
+#install.packages("remotes")
+#library(remotes)
 #remotes::install_github('vqv/ggbiplot')
-ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
-ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
-df[1:10,]
+
+#library(ggbiplot)
+#ggbiplot(pca,labels = rownames(df[,3:302]), var.axes = F)
+#ggbiplot(pca, choices = 3:4, labels = rownames(df[,3:302]) , var.axes=F)
 
 
 
@@ -160,33 +160,39 @@ hist(pred_tree, breaks = seq(0,10,1), ylim = c(0,18))
 hist(test_val, breaks = seq(0,10,1), ylim = c(0,18))
 
 # En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
+# model2 = tree
 
-n <- rep(NA, 4)
-alltrue <- pred_knn == test_val & pred_tree == test_val
-n[1] <- sum(alltrue, na.rm = T)
-onetrue <- pred_knn == test_val & pred_tree != test_val
-n[2] <- sum(onetrue, na.rm = T)
-othertrue <- pred_knn != test_val & pred_tree == test_val
-n[3] <- sum(othertrue, na.rm = T)
-notrue <- pred_knn != test_val & pred_tree != test_val
-n[4] <- sum(notrue, na.rm = T)
-N <- 100
-n
+mcnemar <- function(pred_model1, pred_model2) 
+{
+  n <- rep(NA, 4)
+  alltrue <- pred_model1 == test_val & pred_model2 == test_val
+  n[1] <- sum(alltrue, na.rm = T)
+  onetrue <- pred_model1 == test_val & pred_model2 != test_val
+  n[2] <- sum(onetrue, na.rm = T)
+  othertrue <- pred_model1 != test_val & pred_model2 == test_val
+  n[3] <- sum(othertrue, na.rm = T)
+  notrue <- pred_model1 != test_val & pred_model2 != test_val
+  n[4] <- sum(notrue, na.rm = T)
+  N <- 100
+  print(n)
+  
+  theta <- (n[2] - n[3]) / N ; print(theta)
+  Q <- (N^2 * (N + 1) * (theta + 1) * (1 - theta)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
+  p <- ((theta + 1) * (Q - 1)) / 2
+  q <- ((1 - theta) * (Q - 1)) / 2
+  
+  lower <- 2 * qbeta(0.025, p, q)-1
+  upper <- 2 * qbeta(0.975, p, q)-1
+  print(c(lower, theta, upper))
+  
+  pval <- 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2); print(pval)
+}
+mcnemar(pred_knn, pred_tree)
+mcnemar(pred_knn, pred_base)
+mcnemar(pred_tree, pred_base)
 
-theta <- (n[2] - n[3]) / N ; theta
-Q <- (N^2 * (N + 1) * (theta + 1) * (1 - theta)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
-p <- ((theta + 1) * (Q - 1)) / 2
-q <- ((1 - theta) * (Q - 1)) / 2
 
-lower <- 2 * qbeta(0.025, p, q)-1
-upper <- 2 * qbeta(0.975, p, q)-1
-c(lower, theta, upper)
-
-pval <- 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2); pval
-
-
-
-
+library(MASS)
 # Tester normalfordeling for x
 par(mfrow = c(10,10))
 for (i in 3:102){
@@ -224,4 +230,3 @@ for (i in 203:302){
   para <- fit$estimate
   curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
 }
-library(MASS)
