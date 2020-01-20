@@ -64,6 +64,7 @@ length(adjust_p[adjust_p<0.05])/300
 
 # JUST FOR PLOTTING
 #par(mar=c(1,1,2,2))
+library(MASS)
 par(mar = c(4.1, 2.1, 2.1, 2.1))
 par(mfrow=c(4,4))
 p_vals <- c(rep(NA,300))
