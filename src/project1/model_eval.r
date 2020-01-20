@@ -5,13 +5,14 @@ set.seed(50)
 #install.packages("remotes")
 #install.packages("plot3D")
 
+library(MASS)
 library(class)
 library(tree)
 library(remotes)
 library(ggbiplot)
 library(plot3D)
 
-#setwd("/Users/ejer/Desktop/02445 project/project02445/project1")
+#setwd("/Users/ejer/Desktop/02445 project/project02445/src/project1")
 
 
 # Forberedning af data
@@ -81,6 +82,7 @@ accuracy_tree <- k / 100 ; accuracy_tree
 
 
 # Et eksempel pÃ¥ en tree model
+par(mfrow = c(1,1))
 tree_model  <- tree(person ~ . -repetition, data=train)
 plot(tree_model)
 text(tree_model)
@@ -155,9 +157,7 @@ boxplot(df[,203:302])
 
 
 
-# En anden m?de at implementere mcnemar, der m?ske ogs? er korrekt
-# model2 = tree
-
+# Funktion til at beregne theta, CI for theta samt p-værdi
 mcnemar <- function(pred_model1, pred_model2) 
 {
   n <- rep(NA, 4)
@@ -170,26 +170,34 @@ mcnemar <- function(pred_model1, pred_model2)
   notrue <- pred_model1 != test_val & pred_model2 != test_val
   n[4] <- sum(notrue, na.rm = T)
   N <- 100
-  print(n)
+  cat("n matrix:\n"); cat(n)
   
-  theta <- (n[2] - n[3]) / N ; print(theta)
+  theta <- (n[2] - n[3]) / N
+  cat("\n\nDifference in averages\n"); cat(theta)
+  
   Q <- (N^2 * (N + 1) * (theta + 1) * (1 - theta)) / (N * (n[2] + n[3]) - (n[2] - n[3])^2)
   p <- ((theta + 1) * (Q - 1)) / 2
   q <- ((1 - theta) * (Q - 1)) / 2
   
   lower <- 2 * qbeta(0.025, p, q)-1
   upper <- 2 * qbeta(0.975, p, q)-1
-  print(c(lower, theta, upper))
   
-  pval <- 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2); print(pval)
+  cat("\n\nConfidence interval for the difference\n"); cat(lower); cat(" < "); cat(theta); cat(" < "); cat(upper)
+  
+  pval <- 2 * pbinom(min(n[2],n[3]),n[2]+n[3],1/2)
+  cat("\n\nThe p-value:\n"); cat(pval)
 }
+
+
+
+# McNemar for baseline, KNN og decision tree
 mcnemar(pred_knn, pred_tree)
 mcnemar(pred_knn, pred_base)
 mcnemar(pred_tree, pred_base)
 
 
-library(MASS)
-# Tester normalfordeling for x
+
+# Viser normalfordelte variable ved at trække nogle x, y og z ud
 par(mar = c(4.1, 2.1, 2.1, 2.1))
 par(mfrow = c(3,5))
 for (i in round(seq(3,102,length = 5))){
@@ -201,7 +209,7 @@ for (i in round(seq(3,102,length = 5))){
     para <- fit$estimate
     curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
 }
-# Tester normalfordeling for y
+
 for (i in round(seq(103,202,length = 5))){
     hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("y", i), ylab = NULL)
     Axis(side = 1, labels = F)
@@ -211,7 +219,7 @@ for (i in round(seq(103,202,length = 5))){
     para <- fit$estimate
     curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
 }
-# Tester normalfordeling for z
+
 for (i in round(seq(203,302,length = 5))){
   
   hist(df[,i], main = NULL, prob = T, xaxt = "n", yaxt = "n", xlab = paste("z", i), ylab = NULL)
@@ -222,4 +230,3 @@ for (i in round(seq(203,302,length = 5))){
   para <- fit$estimate
   curve(dnorm(x, para[1], para[2]), col = 2, add = TRUE)
 }
-
