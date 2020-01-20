@@ -70,12 +70,9 @@ legend("bottomright", legend=c("MSE = 14.65"),
 plot(resid(modelDGT))
 plot(resid(modelolsenP))
 
-# Undersøg om mængden af fosfor har en signifikant betydning for yield
+# Undersøg om mållingenerne af fosfor har en signifikant betydning for yield via ANCOVA
 fitDGT <- lm(data$yield ~ data$DGT+data$location)
 anova(fitDGT)
 
 fitolsenP <- lm(data$yield ~ data$olsenP+data$location)
 anova(fitolsenP)
-
-fit_all <- lm(yield ~ olsenP + DGT + location , data = data)
-anova(fit_all)
