@@ -169,8 +169,8 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 	\begin{tabular}{l r}
 		\toprule
 		Classification Model       & Accuracy  \\ \midrule
-		Baseline                   & 0.10      \\
-		3-Nearest neighbor         & 0.62      \\ 
+		Baseline                   & 0.12      \\
+		3-Nearest neighbor         & 0.64      \\ 
 		Binary classification tree & 0.47      \\ \bottomrule
 	\end{tabular}
 \caption{The accuracies of the three models}
@@ -179,18 +179,31 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \noindent To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
 
-\[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 37 & 25 \\ 10 & 28 \end{bmatrix}\] 
+\[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 38 & 26 \\ 9 & 27 \end{bmatrix}\] 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{l r}
 		\toprule
 		Measure        & Value                          \\ \midrule
-		$\hat{\theta}$ & 0.15                           \\ 
-		p-value        & 0.0167                         \\ 
-		CI             & $0.0375 \leq 0.150 \leq 0.261$ \\ \bottomrule
+
+		\textbf{KNN \& Decision tree} &                 \\		
+		$\hat{\theta}$ & 0.17                           \\ 
+		p-value        & 0.00599                        \\ 
+		CI             & $0.0585 \leq 0.170 \leq 0.279$ \\ \midrule
+
+		\textbf{KNN \& Baseline} &                      \\		
+		$\hat{\theta}$ & 0.52                           \\ 
+		p-value        & $2.260 \cdot 10^{-13}$      \\ 
+		CI             & $0.407 \leq 0.520 \leq 0.624$ \\ \midrule
+		
+		\textbf{Decision tree \& Baseline} &            \\
+		$\hat{\theta}$ & 0.35                           \\ 
+		p-value        & $6.867 \cdot 10^{-7}$       \\ 
+		CI             & $0.226 \leq 0.350 \leq 0.468$ \\ \bottomrule
+		
 	\end{tabular}
-\caption{Statistics for difference in accuracies between KNN and decision tree}
+\caption{Statistics for difference in mutual accuracies between KNN, decision tree and baseline.}
 \label{measuresKNNDT}
 \end{table}
 
