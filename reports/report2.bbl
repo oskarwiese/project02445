@@ -1,6 +1,5 @@
 \begin{thebibliography}{1}
 
-
 \bibitem{armdata}
 L.~Lau Raket and B.~Grimme,
 \newblock ``Human Arm Trajectories in Obstacle Avoidance,'' 2014,
@@ -13,7 +12,16 @@ T.~Herlau, M. N.~Schmidt and M. Mørup,
 M. J.~Crawley,
 \newblock ``Statistic: An Introduction using R,'' 2005.
 
+\bibitem{article1}
+S.~Nawara et al,
+\newblock ``A comparison of soil tests for available phosphorus in long-term field experiments in Europe,'' 2017
 
+\bibitem{article2}
+L.~Six et al,
+\newblock ``Testing phosphorus availability for maize with DGT in weathered soils amended with organic materials,'' November 2013
 
+\bibitem{article3}
+S.~Tandy et al,
+\newblock ``The use of DGT for prediction of plant available copper, zinc and phosphorus in agricultural soils,'' May 2011
 
 \end{thebibliography}
