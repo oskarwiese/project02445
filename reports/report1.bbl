@@ -13,7 +13,16 @@ T.~Herlau, M. N.~Schmidt and M. Mørup,
 M. J.~Crawley,
 \newblock ``Statistic: An Introduction using R,'' 2005.
 
+\bibitem{BH}
+Benjamini and Hochberg,
+\newblock ``‘Controlling the false discovery rate: a new and powerful approach to multiple comparisons'', 1995
 
+\bibitem{KNN} 
+B.~Ripley.: "Package ’class’", 01/01-19 .\\
+\url{https://cran.r-project.org/web/packages/class/class.pdf} 
 
+\bibitem{Tree} 
+B.~Ripley.: "Package ‘tree’", 26/05-19.\\
+\url{https://cran.r-project.org/web/packages/tree/tree.pdf}
 
 \end{thebibliography}

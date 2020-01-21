@@ -54,7 +54,7 @@ Ten different test subjects performed obstacle avoidance tasks on a table by rel
 	\includegraphics[width=0.5\linewidth]{billeder/exp_pic.png}
 	\caption{An illustration of the obstacle avoidance setup. Test subjects have to move the cylinder from start to the finnish position "target", while avoiding the blue obstacle.}
 	\label{fig:exppic}
-\end{figure}
+\end{figure} \noindent
 The data itself consists of recorded trajectory movements, by measured $ x,y,z $-coordinates in a three dimensional space. An illustration of the coordinates are given in \ref{fig:rplot}. Here the variables S, M and T vary in the different experiments. An example of ten different arm-trajectory paths of a test subject repeating the same experiment is shown in the figure \ref{fig:rplot}.
 
 \begin{figure}[H]
@@ -63,45 +63,46 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 	\caption{An illustration of test subject 1's arm trajectories in experiment one. Each of the lines in the plot illustrate a repetition in the experiment. }
 	\label{fig:rplot}
 \end{figure}
-
+\noindent
 In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is shown a boxplots of the variation in the Z-dimension of all the test subjects.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{billeder/boxplot_z.pdf}
+	\includegraphics[width=0.55\linewidth]{billeder/boxplot_z.pdf}
 	\caption{Boxplots of the variation in the Z-dimension of the arm trajectories for all test subjects}
 	\label{fig:boxplotz}
 \end{figure}
-
+\noindent
 Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than at the beginning and end of the movement curve, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
 \\\\
 A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couple of principle components as illustrated in \ref{fig:varexp}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{billeder/varexp.png}
+	\includegraphics[width=0.65\linewidth]{billeder/varexp.png}
 	\caption{A variance explained graph. The graph shows the variance explained cumulatively by the number of principle components. The red line in the plot indicates a threshold at 90\% explained variance.}
 	\label{fig:varexp}
 \end{figure}
-
+\noindent
 In order to explain 90 \% of the variation of the data, the first eight principle components are needed, which also can be noted from figure \ref{fig:varexp}. By having a great proportion of the variance explained by relatively few principle components it seems possible to construct a classifier in order to determine a person from his/her trajectory paths.
 \\
 To get a visual grasp of the original data points projected onto the space of the principle components, a scatter plot of the transformed data in the principle component space is plotted, as seen below.
 
 \begin{figure}[H]
 	\centering
-	\subfloat[label 1]{{\includegraphics[width=5cm]{billeder/pca1.pdf} }}%
+	\subfloat[A plot of the first and second principle component]{{\includegraphics[width=4cm]{billeder/pca1.pdf} }}%
 	\qquad
-	\subfloat[label 2]{{\includegraphics[width=5cm]{billeder/pca2.pdf} }}%
-	\caption{Left: A plot of the first two principle components of the data. Right: A plot of the third and fourth principle component. The numbers from 1 to 100 illustrate the date projected onto the principle components}%
+	\subfloat[A plot of the thrid and fourth principle component]{{\includegraphics[width=4cm]{billeder/pca2.pdf} }}%
+	\caption{Left: A plot of the first two principle components of the data. Right: A plot of the third and fourth principle component. The numbers from 1 to 100 illustrate the date projected onto the principle components.}%
 	\label{fig:example}%
 \end{figure}
+\newpage
 
 \noindent In order to perform a series of ANOVAs, the variables need to be normally distributed and independent. This assumption is shown for a couple of variables below.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{billeder/normalAF}
+	\includegraphics[width=0.65\linewidth]{billeder/normalAF}
 	\caption{Histograms for some of the data. In this case a historgram of: x1, x26, x50, x75, x100, y1, y26, y50, y75, y100, 1z, z26, z50, z75, z100. The plots show that the variables are normally distributed.}
 	\label{fig:normalaf}
 \end{figure}
@@ -111,23 +112,25 @@ To get a visual grasp of the original data points projected onto the space of th
 \section{Methods}
 %\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
 
-\subsection*{Models}
-Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. Thsese models are a Binary Classification Tree and a K-nearest neighbors classifier.
-
-\subsubsection*{Binary Classification Tree}
-One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based on Hunt's algorithm, and the best split is the one with the highest purity gain. The splitting ends when the splits no longer add value to the predictions. 
-
-\subsubsection*{K-nearest neighbors}
+\subsection*{Models} \vspace*{-0.2cm}
+Two different models are constructed in order to classify a specific test subject based on the resulting curve of the arm trajectories. Thsese models are a Binary Classification Tree and a K-nearest neighbors classifier. Both of the models are constructed using the programming language R, libraries used are in references, \cite{KNN, Tree}.
+\vspace*{-0.2cm}
+\subsubsection*{Binary Classification Tree}  \vspace*{-0.2cm}
+One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based on Hunt's algorithm, and the best split is the one with the highest purity gain. The splitting ends when the splits no longer add value to the predictions.
+\vspace*{-0.2cm}
+\subsubsection*{K-nearest neighbors}  \vspace*{-0.2cm}
 The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing all of the data. When the model predicts, it chooses the K nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting, and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment, the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
-
-\subsection*{Comparison of models}
+\vspace*{-0.2cm}
+\subsubsection*{Prediction of models}  \vspace*{-0.2cm}
+Each of the two machine learning models constructed is trained using leave one out cross validation and the prediction is tested on the data point that is left out. By using leave one out cross validation the models are trained on as much data as possible. The estimated accuracy of each of the two models are then compared, which is elaborated in the next section.
+\vspace*{-0.2cm}
+\subsection*{Comparison of models} \vspace*{-0.2cm}
 To statistically compare the models, a McNemar's test is chosen. The models are compared under the following hypothesis. 
-
 \begin{align*}\label{key}
 H_0 : & \hat \theta_1 =  \hat \theta_2 \\
 H_1 : & \hat \theta_1 \neq  \hat \theta_2
 \end{align*}
-Where $ \hat \theta_1 $ and $ \hat \theta_2  $ are the estimated accuracies of the models. The \textbf{n} matrix is calculated as, 
+Where $ \hat \theta_1 $ and $ \hat \theta_2  $ are the estimated accuracies of the models.\newline The \textbf{n} matrix is calculated as, 
 \begin{equation*}\label{key}
 \begin{aligned}
 n_{11} &=\sum_{i=1}^{n} c_{i}^{A} c_{i}^{B} \qquad= \{ \text{Both classifiers are correct} \} \\
@@ -138,18 +141,18 @@ n_{22} &=\sum_{k=1}^{n}\left(1-c_{i}^{A}\right)\left(1-c_{i}^{B}\right)=\{\text 
 \end{equation*}
 \noindent
 The p-value is then calculated using the following expression, 
-\begin{equation}\label{key}
+\begin{equation*}\label{key}
 p=2 \mathrm{cdf}_{\mathrm{binom}}\left(m=\min \left\{n_{12}, n_{21}\right\} | prop=\frac{1}{2}, N=n_{12}+n_{21}\right)
-\end{equation}
+\end{equation*}
 \noindent
 The interpretation is that the lower p is, the more evidence there is for A being better than B, but this is only to be interpreted along with the confidence interval given by the following expression.
 
-\begin{equation}\label{key}
+\begin{equation*}\label{key}
 \begin{aligned}
 &\theta_{L}=2 \operatorname{cdf}_{B}^{-1}\left(\frac{\alpha}{2} | \alpha=p, \beta=q\right)-1\\
 &\theta_{U}=2 \operatorname{cdf}_{B}^{-1}\left(1-\frac{\alpha}{2} | \alpha=p, \beta=q\right)-1
 \end{aligned}
-\end{equation}
+\end{equation*}
 \noindent
 If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ and the p-value is significant, then model A is better than model B \cite{mlbog}.
 
@@ -157,7 +160,7 @@ If zero is not observed in the interval given by, $ [\theta_{L},\theta_{U}] $ an
 To test whether there is a significant effect of experiment on the resulting curve an analysis of variance is used as a statistical test. 
 
 \subsubsection*{Analysis of Variance: ANOVA}
-ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables, namely the person, repetition, experiment and whether it is an x,y or z coordinate. The response variable is the position, i.e. the resulting curve. A two-way Anova with experiment and person as explanatory variables are conducted for each of the x1 coordinates, y2 coordinates, z3 coordinates etc. as response variables. This leads to 300 separate Anovas and yields 300 different p-values. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore, there is no difference in the means of the resulting curves. The reason why several Anovas is chosen rather than a set of t-test is due to the fact that Anova minimizes the type I error. The p values obtained are then adjusted by the Benjmain Hochberg method. On a level of significance at $ \alpha = 0.05 $, it would be expected that at least 5\% of the \textit{p}-values are below $ \alpha $. \cite{statbog}
+ANOVA is used when all the explanatory variables are factors. In the case of this experiment there are four explanatory variables, namely the person, repetition, experiment and whether it is an x,y or z coordinate. The response variable is the position, i.e. the resulting curve. A two-way Anova with experiment and person as explanatory variables are conducted for each of the x1 coordinates, y2 coordinates, z3 coordinates etc. as response variables. This leads to 300 separate Anovas and yields 300 different p-values. The null hypothesis is that all the resulting curves in each experiment comes from the same population and therefore, there is no difference in the means of the resulting curves. The reason why several Anovas is chosen rather than a set of t-test is due to the fact that Anova minimizes the type I error. The p values obtained are then adjusted by the Benjmain Hochberg correction method. \cite{statbog, BH}
 
 
 \section{Results}
@@ -179,7 +182,7 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \noindent To test if this difference between accuracies is significant, and if the models are significantly different, McNemar's test has been performed. The result of this test is shown below.
 
-\[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 38 & 26 \\ 9 & 27 \end{bmatrix}\] 
+%\[n = \begin{bmatrix} n_{11} & n_{12} \\ n_{21} & n_{22} \end{bmatrix} = \begin{bmatrix} \text{Both classifiers are correct} & \text{One classifier is correct} \\ \text{The other classifier is correct} & \text{Both classifiers are wrong} \end{bmatrix} = \begin{bmatrix} 38 & 26 \\ 9 & 27 \end{bmatrix}\] 
 
 \begin{table}[H]
 	\centering
@@ -212,7 +215,7 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{billeder/pvals_res.png}
-	\caption{A plot of the adjusted \textit{p}-values. The plot contains 300 different p-values and has a threshold at the level of significance, $ \alpha = 0.05 $. The legend shows that 86.67 \% p-values  are below the level of significance, which in turn makes experiment statistically significant for the resulting curve. }
+	\caption{A plot of the adjusted \textit{p}-values. The plot contains 300 different p-values and has a threshold at the level of significance, $ \alpha = 0.05 $. The legend shows that 86.67 \% p-values  are below the level of significance, which in turn makes experiment a statistically significant variable for the resulting curve. }
 	\label{fig:pvalsres}
 \end{figure}
 
@@ -238,7 +241,7 @@ For the test of whether experiment has a significant effect on the resulting cur
 	\includegraphics[width=0.7\linewidth]{billeder/StadigNormalfordeltAF.png}
 	\caption{This figure shows some of the residuals from the ANOVA models constructed. Furthermore, it is seen that most the residuals from the constructed models are normally distributed. }
 	\label{fig:stadignormalfordeltaf}
-\end{figure}
+\end{figure} \noindent
  Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ and only 5\% of the p-values need to be below $ \alpha $ in order for experiment to be significant for the resulting curve. Thus, if some of the p-values are removed one could argument that experiment still would be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
 
 
