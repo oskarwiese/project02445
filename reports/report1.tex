@@ -90,9 +90,9 @@ To get a visual grasp of the original data points projected onto the space of th
 
 \begin{figure}[H]
 	\centering
-	\subfloat[A plot of the first and second principle component]{{\includegraphics[width=4cm]{billeder/pca1.pdf} }}%
+	\subfloat[A plot of the first and second principle component]{{\includegraphics[width=8cm]{billeder/pca1.png} }}%
 	\qquad
-	\subfloat[A plot of the thrid and fourth principle component]{{\includegraphics[width=4cm]{billeder/pca2.pdf} }}%
+	\subfloat[A plot of the thrid and fourth principle component]{{\includegraphics[width=8cm]{billeder/pca2.png} }}%
 	\caption{Left: A plot of the first two principle components of the data. Right: A plot of the third and fourth principle component. The numbers from 1 to 100 illustrate the date projected onto the principle components.}%
 	\label{fig:example}%
 \end{figure}
@@ -241,13 +241,12 @@ For the test of whether experiment has a significant effect on the resulting cur
 	\includegraphics[width=0.7\linewidth]{billeder/StadigNormalfordeltAF.png}
 	\caption{This figure shows some of the residuals from the ANOVA models constructed. Furthermore, it is seen that most the residuals from the constructed models are normally distributed. }
 	\label{fig:stadignormalfordeltaf}
-\end{figure} \noindent
+\end{figure} \noindent \vspace*{-0.1cm}
  Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ and only 5\% of the p-values need to be below $ \alpha $ in order for experiment to be significant for the resulting curve. Thus, if some of the p-values are removed one could argument that experiment still would be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
 
 
-\section{Conclusion}
+\section{Conclusion} \vspace*{-0.1cm}
 %\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
-
 In this paper, two important questions have been investigated. The first question is whether it is possible to use a 3-nearest neighbor and binary decision tree machine learning model to classify the person performing an experiment based on the a given movement curve, and which model is best at performing this classification. Based on the accuracies of the KNN and decision tree models in comparison to baseline, it is pretty safe to say that it is possible to use a machine learning model to predict the person based on the movement curve. Especially more complex machine learning models could be very successful for this prediction task, but actually implementing these more complicated models has been left for future work. For comparing the two models to each other, McNemar's test has been used, which showed that there is a significant difference in the accuracies of the two models and that both models are significantly different from the baseline. As such, if one of the two models produced in this paper should be used to classify the person, the KNN model is recommended.
 
 The second question was if the performed experiment had a significant effect on the resulting movement curve. To investigate this problem, 300 ANOVA have been performed, and it was evident that there is a big significance of person and experiment on the resulting curve. For future papers, it could be interesting to use other test statistics to reinforce this result. From the result of the ANOVAs, it is clear that experiment has an effect on how the curve turns out, which can be thought of as logical, since the experiments vary in obstacle sizes. Therefore, the subject has to use arm movements of varying sizes to move the object over the obstacle, resulting in a vastly different curve.
