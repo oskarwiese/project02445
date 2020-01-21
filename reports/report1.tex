@@ -99,7 +99,7 @@ To get a visual grasp of the original data points projected onto the space of th
 \end{figure}
 \newpage
 
-\noindent In order to perform a series of ANOVAs, the variables need to be normally distributed and independent. This assumption is shown for a couple of variables below.
+\noindent In order to perform a series of ANOVAs, the variables need to be normally distributed and independent. This assumption is shown for a couple of variables below. The distributions for the rest of the variables are shown in the appendix.
 
 \begin{figure}[H]
 	\centering
@@ -243,7 +243,7 @@ For the test of whether experiment has a significant effect on the resulting cur
 	\caption{This figure shows some of the residuals from the ANOVA models constructed. Furthermore, it is seen that most the residuals from the constructed models are normally distributed. }
 	\label{fig:stadignormalfordeltaf}
 \end{figure} \noindent \vspace*{-0.1cm}
- Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ which make experiment extremely significant. Thus, if some of the p-values are removed  experiment would still be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
+ Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. The distributions for the rest of the model residuals are given in the appendix [\ref{fig:residu1}, \ref{fig:residu2}, \ref{fig:residu3}] It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ which make experiment extremely significant. Thus, if some of the p-values are removed  experiment would still be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
 
 
 \section{Conclusion} \vspace*{-0.1cm}
@@ -257,6 +257,48 @@ In conclusion, it is clear that security and access authorization could stand to
 \section{Appendix}
 Link to GitHub to see code:
 \url{https://github.com/oskarwiese/project02445.git}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/x_dists}
+	\caption{The distributions for every x-variable of the data.}
+	\label{fig:xdists}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/y_dists}
+	\caption{The distributions for every y-variable of the data.}
+	\label{fig:ydists}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/z_dists}
+	\caption{The distributions for every z-variable of the data.}
+	\label{fig:zdists}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/residu1}
+	\caption{The distributions of the model residuals from every model constructed by subsetting for every x-variable.}
+	\label{fig:residu1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/residu2}
+	\caption{The distributions of the model residuals from every model constructed by subsetting for every y-variable.}
+	\label{fig:residu2}
+\end{figure}
+	
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{billeder/residu3}
+	\caption{The distributions of the model residuals from every model constructed by subsetting for every z-variable.}
+	\label{fig:residu3}
+\end{figure}	
 	
 \bibliographystyle{IEEEbib}
 \bibliography{refs}
