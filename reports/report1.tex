@@ -56,7 +56,7 @@ Ten different test subjects performed obstacle avoidance tasks on a table by rel
 	\caption{An illustration of the obstacle avoidance setup. Test subjects have to move the cylinder from start to the finnish position "target", while avoiding the blue obstacle.}
 	\label{fig:exppic}
 \end{figure} \noindent
-The data itself consists of recorded trajectory movements, by measured $ x,y,z $-coordinates in a three dimensional space. An illustration of the coordinates are given in \ref{fig:rplot}. Here the variables S, M and T vary in the different experiments. An example of ten different arm-trajectory paths of a test subject repeating the same experiment is shown in the figure \ref{fig:rplot}.
+The data itself consists of recorded trajectory movements, by measured $ x,y,z $-coordinates in a three dimensional space. An illustration of the coordinates are given in \ref{fig:rplot}. Here the variables S, M and T vary in the different experiments. An example of ten different arm-trajectory paths of a test subject repeating the same experiment is shown in figure \ref{fig:rplot}.
 
 \begin{figure}[H]
 	\centering
@@ -65,7 +65,7 @@ The data itself consists of recorded trajectory movements, by measured $ x,y,z $
 	\label{fig:rplot}
 \end{figure}
 \noindent
-In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is shown a boxplots of the variation in the Z-dimension of all the test subjects.
+In figure \ref{fig:rplot} the path of the arm trajectories indicates that just in one persons repetition of the same experiment there is a lot of variation. Below is shown boxplots of the variation in the Z-dimension of all the test subjects.
 
 \begin{figure}[H]
 	\centering
@@ -74,9 +74,9 @@ In figure \ref{fig:rplot} the path of the arm trajectories indicates that just i
 	\label{fig:boxplotz}
 \end{figure}
 \noindent
-Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than at the beginning and end of the movement curve, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
+Figure \ref{fig:boxplotz} presents a notable variation in the Z-dimension which suggests that it may be possible to distinguish each test subjects trajectory arm movements. In figure \ref{fig:boxplotz}, the variation is greater for $ z \in [13,85] $ than at the beginning and end of the movement curve, which makes sense since each subject moves the cylindrical object from the same start position to the same end position.
 \\\\
-A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couple of principle components as illustrated in \ref{fig:varexp}.
+A principle component analysis is done in order to investigate the dimensionality and variation of the data. The analysis yields a hundred principle components, whereas a lot of the variation is explained by the first couple of principle components as illustrated in figure \ref{fig:varexp}.
 
 \begin{figure}[H]
 	\centering
@@ -85,7 +85,7 @@ A principle component analysis is done in order to investigate the dimensionalit
 	\label{fig:varexp}
 \end{figure}
 \noindent
-In order to explain 90 \% of the variation of the data, the first eight principle components are needed, which also can be noted from figure \ref{fig:varexp}. By having a great proportion of the variance explained by relatively few principle components it seems possible to construct a classifier in order to determine a person from his/her trajectory paths.
+In order to explain 90 \% of the variation of the data, the first eight principle components are needed, which also can be noted from figure \ref{fig:varexp}. By having a great proportion of the variance explained by relatively few principle components, it seems possible to construct a classifier in order to determine a person from his/her trajectory paths.
 \\
 To get a visual grasp of the original data points projected onto the space of the principle components, a scatter plot of the transformed data in the principle component space is plotted, as seen below.
 
@@ -108,7 +108,7 @@ To get a visual grasp of the original data points projected onto the space of th
 	\label{fig:normalaf}
 \end{figure}
 
-\noindent Here, it is easy to see that the datapoints are normally distributed or pretty close to normally distributed.
+\noindent Here, it is easy to see that the datapoints are normally distributed or pretty close to be normally distributed. The rest of the datapoints are also normally distributed and can be seen in appendix. Thus, the assumption of ANOVA are fulfilled.  
 
 \section{Methods}
 %\textit{Describe the methods you used and why you decided to use them. Also discuss the assumptions behind the methods. Do not go into detail with theory.}
@@ -120,7 +120,7 @@ Two different models are constructed in order to classify a specific test subjec
 One of the machine learning models used for classification is a binary classification tree. A classification tree is constructed by splitting data into subsets. In the case of a binary classification tree each branch is split into two subsets. The splitting is based on Hunt's algorithm, and the best split is the one with the highest purity gain. The splitting ends when the splits no longer add value to the predictions.
 \vspace*{-0.2cm}
 \subsubsection*{K-nearest neighbors}  \vspace*{-0.2cm}
-The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing all of the data. When the model predicts, it chooses the K nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting, and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment, the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
+The second machine learning model used for classification is a K-nearest neighbor classifier. The model is constructed by storing all of the training data. When the model predicts, it chooses the K nearest neighbors with euclidean distance as the measure. The model implemented in this project uses majority voting, and if there is a tie between the neighbors the closest neighbor is chosen as the prediction. As for this experiment, the classifier uses $ K=3 $ nearest neighbors based on pilot experiments.
 \vspace*{-0.2cm}
 \subsubsection*{Prediction of models}  \vspace*{-0.2cm}
 Each of the two machine learning models constructed is trained using leave one out cross validation and the prediction is tested on the data point that is left out. By using leave one out cross validation the models are trained on as much data as possible. The estimated accuracy of each of the two models are then compared, which is elaborated in the next section.
@@ -232,7 +232,7 @@ Using the 3-nearest neighbor and binary classification tree models to classify t
 
 \section{Discussion}
 %\textit{What do your results show? \\ Discuss your results. How reliable are they?} \\
-From \ref{accuracies} in the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.12, which is close to what is expected when dealing with 10 classes. Performing three McNemar's tests to test the differences between accuracies between KNN and the decision tree, KNN and baseline as well as decision tree and baseline, the results of which are shown in \ref{measuresKNNDT}, it is clear that both of the models are significantly better than baseline, since both of these p-values are under 0.05. Meanwhile, it is also clear that the KNN model is better than the decision tree with a p-value of 0.00599. The difference between the values of the accuracies is around $0.0585 \leq 0.170 \leq 0.279$. As such, it is evident that the KNN model would be a better machine learning model to apply to this problem. Furthermore, it would be reasonable to expect that a more complex model like a neural network would get a much higher accuracy, but this is left as future work.
+From table \ref{accuracies} in the results, it is clear that is it somewhat possible to predict the person that performed a movement based only on that person's movement curve. The baseline, which simply samples a number from 1 to 10 for the prediction, got an accuracy of 0.12, which is close to what is expected when dealing with 10 classes. Performing three McNemar's tests to test the differences between accuracies between KNN and the decision tree, KNN and baseline as well as decision tree and baseline, the results of which are shown in table \ref{measuresKNNDT}, it is clear that both of the models are significantly better than baseline, since both of these p-values are under 0.05. Meanwhile, it is also clear that the KNN model is better than the decision tree with a p-value of 0.00599. The difference between the values of the accuracies is around $0.0585 \leq 0.170 \leq 0.279$. As such, it is evident that the KNN model would be a better machine learning model to apply to this problem. Furthermore, it would be reasonable to expect that a more complex model like a neural network would get a much higher accuracy, but this is left as future work.
 %\\\\
 %For the test of whether experiment has a significant effect on the resulting curve, ANOVA has been performed which results in the third table of the results. Here, it is very obvious that every explanatory variable is extremely significant, as every p-value is $<2.200 \cdot 10^{-16}$. This would imply that position, repetition, person and experiment has an influence on how the curve ends up looking. This could make sense since position is directly correlated with the curve and people have different movement patterns, which was also evident from the other question of this paper. Since the different experiments have obstacles of varying heights and therefore results in different curves. The significance of the repetition on effect of the curve seems slightly more mysterious, but this can be explained by the fact that no one is able to move in the exact same way 10 times in a row, so the variances in every repetition is statistically significant for the curve. From figure \ref{fig:rplot} it is also seen that each curve in the repetition varies a notable amount, which could explain why it is statistically significant variable for the resulting curve. 
 \\\\
@@ -243,14 +243,14 @@ For the test of whether experiment has a significant effect on the resulting cur
 	\caption{This figure shows some of the residuals from the ANOVA models constructed. Furthermore, it is seen that most the residuals from the constructed models are normally distributed. }
 	\label{fig:stadignormalfordeltaf}
 \end{figure} \noindent \vspace*{-0.1cm}
- Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ and only 5\% of the p-values need to be below $ \alpha $ in order for experiment to be significant for the resulting curve. Thus, if some of the p-values are removed one could argument that experiment still would be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
+ Figure \ref{fig:stadignormalfordeltaf} represents some of the constructed model residuals. It is revealed that most of the residuals from the constructed models are normally distributed, which makes the analysis of variance valid. Some of the residuals are not normally distributed, an example is z100, seen in figure \ref{fig:stadignormalfordeltaf}. On the other hand $ 86.67 $ \% of the p-values are below $ 0.05 $ which make experiment extremely significant. Thus, if some of the p-values are removed  experiment would still be significant for the resulting curve. The finding also makes sense, since each experiment has different heights in which the test participants have to move the cylindrical object. 
 
 
 \section{Conclusion} \vspace*{-0.1cm}
 %\textit{What are your conclusions? The conclusion should be connected to the aim of the report in the introduction. \\ Highlight important results \\ If you have found interesting problems/aspects that you haven’t carried out, you can specify them here as ‘future work’.}
 In this paper, two important questions have been investigated. The first question is whether it is possible to use a 3-nearest neighbor and binary decision tree machine learning model to classify the person performing an experiment based on the a given movement curve, and which model is best at performing this classification. Based on the accuracies of the KNN and decision tree models in comparison to baseline, it is pretty safe to say that it is possible to use a machine learning model to predict the person based on the movement curve. Especially more complex machine learning models could be very successful for this prediction task, but actually implementing these more complicated models has been left for future work. For comparing the two models to each other, McNemar's test has been used, which showed that there is a significant difference in the accuracies of the two models and that both models are significantly different from the baseline. As such, if one of the two models produced in this paper should be used to classify the person, the KNN model is recommended.
 
-The second question was if the performed experiment had a significant effect on the resulting movement curve. To investigate this problem, 300 ANOVA have been performed, and it was evident that there is a big significance of person and experiment on the resulting curve. For future papers, it could be interesting to use other test statistics to reinforce this result. From the result of the ANOVAs, it is clear that experiment has an effect on how the curve turns out, which can be thought of as logical, since the experiments vary in obstacle sizes. Therefore, the subject has to use arm movements of varying sizes to move the object over the obstacle, resulting in a vastly different curve.
+The second question was if the performed experiment had a significant effect on the resulting movement curve. To investigate this problem, 300 ANOVA have been performed, and it was evident that there is a big significance of experiment on the resulting curve. For future papers, it could be interesting to use other test statistics to reinforce this result. From the result of the ANOVAs, it is clear that experiment has an effect on how the curve turns out, which can be thought of as logical, since the experiments vary in obstacle sizes. Therefore, the subject has to use arm movements of varying sizes to move the object over the obstacle, resulting in a vastly different curve.
 
 In conclusion, it is clear that security and access authorization could stand to gain from using classification of people through movement curves. What this technology might be used for in the future, though, remains to be seen.
 \newpage
